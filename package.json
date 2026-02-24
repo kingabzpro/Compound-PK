@@ -16,7 +16,8 @@
     "@astrojs/mdx": "4.3.7",
     "@astrojs/react": "4.4.0",
     "@astrojs/sitemap": "^3.6.0",
-    "@astrojs/vercel": "^9.0.4",
+    "@digi4care/astro-google-tagmanager": "^1.6.0",
+    "@justinribeiro/lite-youtube": "^1.8.2",
     "astro": "5.14.4",
     "astro-auto-import": "^0.4.5",
     "astro-font": "^1.1.0",
@@ -27,8 +28,6 @@
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "react-icons": "^5.5.0",
-    "@digi4care/astro-google-tagmanager": "^1.6.0",
-    "@justinribeiro/lite-youtube": "^1.8.2",
     "remark-collapse": "^0.1.2",
     "remark-toc": "^9.0.0",
     "vite": "^7.1.9"

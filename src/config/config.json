@@ -1,7 +1,7 @@
 {
   "site": {
     "title": "Compound PK",
-    "base_url": "https://bookworm-light-astro.vercel.app",
+    "base_url": "https://compound-pk.vercel.app/",
     "base_path": "/",
     "trailing_slash": false,
     "favicon": "/images/site-favicon-20260224-v2.svg?v=2",

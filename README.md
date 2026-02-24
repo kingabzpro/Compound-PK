@@ -1,79 +1,45 @@
 # Compound PK
 
-> Long-term investing, simplified.
+Long-term investing content for Pakistanis, built with Astro.
 
-A blog for Pakistanis on what it takes to achieve FIRE (Financial Independence, Retire Early).
-
-## Development
+## Quick Start
 
 ```bash
 npm install
 npm run dev
 ```
 
-## Quality + Build
+Open: `http://localhost:4321`
+
+## Key Features
+
+- Built with Astro for fast static pages
+- Markdown and MDX content support
+- Blog taxonomy pages (authors, categories, tags)
+- Client-side search with Fuse.js
+- SEO-ready metadata, sitemap, and robots support
+- Config-driven site settings in `src/config/config.json`
+
+## Common Commands
 
 ```bash
-npm run check
-npm run build
+npm run dev      # local development
+npm run check    # Astro type/content checks
+npm run build    # production build to dist/
+npm run preview  # preview built site locally
 ```
 
-## OpenAI Codex Skills
+## Project Structure
 
-Installed curated skills:
-- `openai-docs`
-- `vercel-deploy`
+- `src/content/posts/` blog posts
+- `src/content/pages/` static pages
+- `src/content/authors/` author profiles
+- `src/config/config.json` site metadata and base URL
+- `public/` static assets
 
-Custom project skill created:
-- Repo copy: `codex-skills/compound-pk-vercel-deploy`
-- Installed copy: `C:\Users\abida\.codex\skills\compound-pk-vercel-deploy`
+## Deployment
 
-After installing new skills, restart Codex to pick them up.
+This repo is platform-agnostic. Connect the GitHub repository to your hosting provider and use:
 
-## Deploy To Vercel
-
-This project is configured for Vercel with:
-- `@astrojs/vercel` adapter in `astro.config.mjs`
-- Security headers in `vercel.json`
-
-### 1) Prepare config
-
-Update site URL before production deploy:
-- `src/config/config.json` -> `site.base_url` to your real Vercel domain.
-
-### 2) Local preflight
-
-```bash
-powershell -ExecutionPolicy Bypass -File .\codex-skills\compound-pk-vercel-deploy\scripts\preflight.ps1
-```
-
-### 3) First-time Vercel setup
-
-```bash
-npx vercel login
-npx vercel link
-```
-
-### 4) Preview deploy (default)
-
-```bash
-powershell -ExecutionPolicy Bypass -File .\codex-skills\compound-pk-vercel-deploy\scripts\deploy-vercel.ps1
-```
-
-### 5) Production deploy
-
-```bash
-powershell -ExecutionPolicy Bypass -File .\codex-skills\compound-pk-vercel-deploy\scripts\deploy-vercel.ps1 -Prod
-```
-
-### 6) Vercel dashboard checks
-
-Project settings should be:
-- Framework Preset: `Astro`
-- Build Command: `npm run build`
-- Output Directory: `dist`
-- Install Command: `npm install`
-
-## License
-
-MIT
+- Build command: `npm run build`
+- Output directory: `dist`

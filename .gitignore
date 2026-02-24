@@ -24,5 +24,6 @@ package-lock.json
 # ignore .astro directory
 .astro
 
-# vercel metadata
-.vercel
+# local editor and tooling
+.vscode/
+codex-skills/
