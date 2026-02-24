@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="460" height="110" viewBox="0 0 460 110" role="img" aria-label="Compound PK logo">
+  <defs>
+    <style>
+      text { 
+        font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      }
+      .navy { fill: #0f1f33; }
+      .teal { fill: #1b7f75; }
+      .muted { fill: #2f3f55; opacity: 0.85; }
+    </style>
+  </defs>
+
+  <!-- Wordmark -->
+  <g transform="translate(28,56)">
+    <!-- Main Title -->
+    <text x="0" y="0" font-size="48" font-weight="750" class="navy" letter-spacing="-0.5">
+      Compound
+    </text>
+
+    <!-- PK Badge (closer + smaller) -->
+    <g transform="translate(285,-34)">
+      <rect x="0" y="0" width="78" height="46" rx="16" class="teal"></rect>
+      <text x="39" y="30" text-anchor="middle" font-size="22" font-weight="800" fill="#ffffff" letter-spacing="0.5">
+        PK
+      </text>
+    </g>
+
+    <!-- Tagline (closer to title) -->
+    <text x="1" y="36" font-size="16" font-weight="500" class="muted" letter-spacing="4">
+      LONG-TERM INVESTING
+    </text>
+  </g>
+</svg>

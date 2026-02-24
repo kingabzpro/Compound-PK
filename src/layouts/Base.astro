@@ -1,5 +1,4 @@
 ---
-import TwSizeIndicator from "@/components/TwSizeIndicator.astro";
 import config from "@/config/config.json";
 import theme from "@/config/theme.json";
 import { plainify } from "@/lib/utils/textConverter";
@@ -51,17 +50,17 @@ const { title, meta_title, description, image, noindex, canonical } =
     <!-- favicon -->
     <link rel="shortcut icon" href={config.site.favicon} />
     <!-- theme meta -->
-    <meta name="theme-name" content="bookworm-light-astro" />
-    <meta name="msapplication-TileColor" content="#000000" />
+    <meta name="theme-name" content="compound-pk" />
+    <meta name="msapplication-TileColor" content="#10243F" />
     <meta
       name="theme-color"
       media="(prefers-color-scheme: light)"
-      content="#fff"
+      content="#F8FAFC"
     />
     <meta
       name="theme-color"
       media="(prefers-color-scheme: dark)"
-      content="#000"
+      content="#10243F"
     />
     <meta name="generator" content={Astro.generator} />
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -173,7 +172,6 @@ const { title, meta_title, description, image, noindex, canonical } =
       )
     }
 
-    <TwSizeIndicator />
     <Header />
     <main id="main-content" class="min-h-[60vh]">
       <slot />

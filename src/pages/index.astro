@@ -12,9 +12,34 @@ const totalPages = Math.ceil(posts.length / config.settings.pagination);
 const currentPosts = sortedPosts.slice(0, config.settings.pagination);
 ---
 
-<Base>
-  <section class="section">
+<Base
+  title="Compound PK"
+  description="Long-term investing, simplified. Practical investing strategies for Pakistanis pursuing financial independence."
+>
+  <section class="section pb-10">
     <div class="container">
+      <div class="rounded-2xl border border-border bg-light px-6 py-10 md:px-12 md:py-14">
+        <p class="mb-4 text-sm font-semibold uppercase tracking-[0.2em] text-primary">
+          Long-term investing, simplified.
+        </p>
+        <h1 class="h2 mb-4 max-w-3xl">Build Wealth. Retire Early. Stay Free.</h1>
+        <p class="mb-8 max-w-2xl text-lg text-text">
+          Practical investing strategies for Pakistanis pursuing financial
+          independence.
+        </p>
+        <div class="flex flex-wrap gap-4">
+          <a href="/categories/mindset" class="btn btn-primary">Start Here</a>
+          <a href="/#latest-articles" class="btn btn-outline-primary">
+            Read Latest Articles
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="latest-articles" class="section pt-10">
+    <div class="container">
+      <h2 class="h3 mb-10">Latest Articles</h2>
       <Posts posts={currentPosts} className="mb-16" />
       <Pagination currentPage={1} totalPages={totalPages} />
     </div>

@@ -1,23 +1,23 @@
 ---
-title: "I’m John Doe, A content writer based in LDN, Currently at Bookworm"
+title: "I’m Abid Ali Awan, Founder of Compound PK"
 meta_title: "About"
-image: "/images/author.png"
+image: "/images/authors/abid-ali-awan.png"
 draft: false
 
 what_i_do:
   title: "What I Do"
   items:
-  - title: "Content Writing"
-    description: "Purus eget ipsum elementum venenatis, quis rutrum mi semper nonpurus eget ipsum elementum venenatis."
+  - title: "FIRE Education"
+    description: "I publish practical guides for Pakistanis who want to build wealth through disciplined long-term investing."
   
-  - title: "Photography"
-    description: "Aenean maximus urna magna elementum, quis rutrum mi semper non purus eget ipsum venenatis."
+  - title: "Investment Research"
+    description: "I translate complex investing concepts into simple, action-focused frameworks for beginners."
   
-  - title: "Web Research"
-    description: "Aenean maximus urna magna elementum venenatis, quis semper non purus eget ipsum venenatis."
+  - title: "Calculator-Driven Planning"
+    description: "I design practical FIRE calculators and step-by-step planning methods grounded in real-world constraints."
 
 ---
 
-A content writer with over 12 years experience working across brand identity, publishing and digital products. Maecenas sit amet purus eget ipsum elementum venenatis. Aenean maximus urna magna elementum venenatis quis non purus.
+I am Abid Ali Awan, the creator of Compound PK. This site helps Pakistani investors focus on what actually works: consistent saving, diversified investing, and long-term thinking.
 
-Purus eget ipsum elementum venenatis. Aenean maximus urna magna elementum venenatis, quis rutrum mi semper non purus eget ipsum elementum venenatis, aenean maximus urna magna elementum.
+Compound PK is built for readers pursuing financial independence with clear, practical guidance that can be applied one month at a time.

@@ -7,8 +7,26 @@ import { sortByDate } from "@/lib/utils/sortFunctions";
 import taxonomyFilter from "@/lib/utils/taxonomyFilter";
 import { humanize } from "@/lib/utils/textConverter";
 
+const categoryTitleMap: Record<string, string> = {
+  mindset: "Mindset",
+  "pakistan-investing": "Pakistan Investing",
+  "global-etfs": "Global ETFs",
+  "savings-income": "Savings & Income",
+  calculators: "Calculators",
+  "case-studies": "Case Studies",
+};
+
 export async function getStaticPaths() {
-  const categories = await getTaxonomy("posts", "categories");
+  const compoundPkCategories = [
+    "mindset",
+    "pakistan-investing",
+    "global-etfs",
+    "savings-income",
+    "calculators",
+    "case-studies",
+  ];
+  const postCategories = await getTaxonomy("posts", "categories");
+  const categories = [...new Set([...compoundPkCategories, ...postCategories])];
 
   return categories.map((category) => {
     return {
@@ -23,7 +41,10 @@ const posts = await getSinglePage("posts");
 const filterByCategory = taxonomyFilter(posts, "categories", category);
 const sortedPosts = sortByDate(filterByCategory);
 
-const title = humanize(category || "");
+const title =
+  category && categoryTitleMap[category]
+    ? categoryTitleMap[category]
+    : humanize(category || "");
 ---
 
 <Base title={title || "Category"}>
@@ -31,7 +52,15 @@ const title = humanize(category || "");
     <div class="container">
       <p class="text-center text-2xl mb-4">Showing Posts From</p>
       <h1 class="h2 mb-16 text-center text-primary">{title}</h1>
-      <Posts posts={sortedPosts} fluid={false} />
+      {
+        sortedPosts.length > 0 ? (
+          <Posts posts={sortedPosts} fluid={false} />
+        ) : (
+          <p class="text-center text-text">
+            No posts have been published in this category yet.
+          </p>
+        )
+      }
     </div>
   </div>
 </Base>
