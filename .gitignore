@@ -23,3 +23,6 @@ package-lock.json
 
 # ignore .astro directory
 .astro
+
+# vercel metadata
+.vercel

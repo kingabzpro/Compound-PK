@@ -16,6 +16,7 @@
     "@astrojs/mdx": "4.3.7",
     "@astrojs/react": "4.4.0",
     "@astrojs/sitemap": "^3.6.0",
+    "@astrojs/vercel": "^9.0.4",
     "astro": "5.14.4",
     "astro-auto-import": "^0.4.5",
     "astro-font": "^1.1.0",
