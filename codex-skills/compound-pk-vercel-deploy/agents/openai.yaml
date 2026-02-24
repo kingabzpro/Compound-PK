@@ -1,4 +1,0 @@
-interface:
-  display_name: "Compound PK Vercel Deploy"
-  short_description: "Build and deploy Compound PK Astro site to Vercel safely."
-  default_prompt: "Run preflight checks, build Compound PK, and deploy to Vercel with correct project settings."
