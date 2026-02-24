@@ -1,30 +1,49 @@
 ---
-title: "Privacy"
-meta_title: ""
-description: "this is meta description"
+title: "Privacy Policy"
+meta_title: "Privacy Policy | Compound PK"
+description: "How Compound PK collects, uses, and protects visitor information."
 draft: false
 ---
 
-#### Responsibility of Contributors
+Effective date: February 24, 2026
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Purus, donec nunc eros, ullamcorper id feugiat quisque aliquam sagittis. Sem turpis sed viverra massa gravida pharetra. Non dui dolor potenti eu dignissim fusce. Ultrices amet, in curabitur a arcu a lectus morbi id. Iaculis erat sagittis in tortor cursus. Molestie urna eu tortor, erat scelerisque eget. Nunc hendrerit sed interdum lacus. Lorem quis viverra sed
+Compound PK respects your privacy. This page explains what information we collect and how we use it.
 
-pretium, aliquam sit. Praesent elementum magna amet, tincidunt eros, nibh in leo. Malesuada purus, lacus, at aliquam suspendisse tempus. Quis tempus amet, velit nascetur sollicitudin. At sollicitudin eget amet in. Eu velit nascetur sollicitudin erhdfvssfvrgss eget viverra nec elementum. Lacus, facilisis tristique lectus in.
+### Information we collect
 
-#### Gathering of Personal Information
+- Basic usage data such as page views, browser type, and referring source.
+- Information you provide directly (for example, when you contact us).
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Purus, donec nunc eros, ullamcorper id feugiat quisque aliquam sagittis. Sem turpis sed viverra massa gravida pharetra. Non dui dolor potenti eu dignissim fusce. Ultrices amet, in curabitur a arcu a lectus morbi id. Iaculis erat sagittis in tortor cursus. Molestie urna eu tortor, erat scelerisque eget. Nunc hendrerit sed interdum lacus. Lorem quis viverra sed
+### How we use information
 
-#### Protection of Personal- Information
+- To operate and improve the website.
+- To understand which articles are useful to readers.
+- To respond to messages or support requests.
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Purus, donec nunc eros, ullamcorper id feugiat quisque aliquam sagittis. Sem turpis sed viverra massa gravida pharetra. Non dui dolor potenti eu dignissim fusce. Ultrices amet, in curabitur a arcu a lectus morbi id. Iaculis erat sagittis in tortor cursus.
+### Cookies and analytics
 
-Molestie urna eu tortor, erat scelerisque eget. Nunc hendrerit sed interdum lacus. Lorem quis viverra sed
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Purus, donec nunc eros, ullamcorper id feugiat
+Compound PK may use cookies or similar technologies for analytics and website performance. You can control cookies through your browser settings.
 
-#### Privacy Policy Changes
+### Information sharing
 
-1. Sll the Themefisher items are designed to be with the latest , We check all
-2. comments that threaten or harm the reputation of any person or organization
-3. personal information including, but limited to, email addresses, telephone numbers
-4. Any Update come in The technology Customer will get automatic Notification.
+We do not sell your personal data. We may share limited data with service providers that help us run the site (for example, analytics or hosting providers), only as needed.
+
+### Data retention
+
+We keep data only as long as reasonably necessary for operational, legal, or security purposes.
+
+### Third-party links
+
+Articles may link to external websites. We are not responsible for privacy practices of third-party sites.
+
+### Your choices
+
+You can request updates or deletion of any information you submitted directly by contacting us.
+
+### Policy updates
+
+This policy may be updated over time. Material changes will be reflected by updating the effective date on this page.
+
+### Contact
+
+For privacy questions, use the Contact page on this website.
