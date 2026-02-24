@@ -27,13 +27,7 @@
   },
 
   "params": {
-    "contact_form_action": "#",
+    "contact_form_action": "https://formspree.io/f/mqedwbgl",
     "copyright": "Copyright © 2026 Compound PK. All rights reserved."
-  },
-
-  "contactinfo": {
-    "address": "355 S Grand Ave <br/> Los Angeles, CA 90071",
-    "email": "info@bookworm.org",
-    "phone": "+800 567 1234"
   }
 }

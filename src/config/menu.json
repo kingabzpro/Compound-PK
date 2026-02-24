@@ -19,7 +19,7 @@
       "url": "/about"
     },
     {
-      "name": "Disclaimer (educational only)",
+      "name": "Disclaimer",
       "url": "/disclaimer"
     },
     {
@@ -27,7 +27,7 @@
       "url": "/privacy-policy"
     },
     {
-      "name": "Newsletter signup",
+      "name": "Contact",
       "url": "/contact"
     }
   ]
