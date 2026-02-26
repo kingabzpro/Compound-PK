@@ -75,7 +75,7 @@
 /* content style */
 .content {
   @apply prose max-w-none prose-headings:font-bold prose-headings:text-dark prose-p:text-text prose-p:leading-8 prose-p:mb-6 prose-lead:text-text prose-strong:text-dark prose-li:text-text;
-  @apply prose-h1:mb-5 prose-h1:text-h1-sm prose-h2:mb-4 prose-h2:mt-8 prose-h2:text-h3-sm prose-h3:mt-6 prose-h3:text-h4 prose-h4:mt-6 prose-h5:mb-4 prose-h6:mb-6 md:prose-h1:text-h1 md:prose-h2:text-h3 md:prose-h3:text-h4;
+  @apply prose-h1:mb-5 prose-h1:text-h1-sm prose-h2:mb-4 prose-h2:mt-7 prose-h2:text-h5-sm prose-h2:font-semibold prose-h3:mt-5 prose-h3:text-h6 prose-h3:font-medium prose-h4:mt-5 prose-h5:mb-4 prose-h6:mb-6 md:prose-h1:text-h1 md:prose-h2:text-h5 md:prose-h3:text-h6;
   @apply prose-a:font-semibold prose-a:text-primary prose-a:underline prose-a:underline-offset-4 prose-a:transition prose-a:duration-200 prose-a:hover:text-dark;
   @apply prose-blockquote:rounded-xl prose-blockquote:border-primary prose-blockquote:bg-light prose-blockquote:px-7 prose-blockquote:py-4 prose-blockquote:text-lg prose-blockquote:leading-8 prose-blockquote:text-dark;
   @apply prose-pre:rounded-xl prose-pre:px-6 prose-pre:py-5;
