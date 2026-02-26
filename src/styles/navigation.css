@@ -1,6 +1,6 @@
 /* navbar items */
 .header {
-  @apply sticky top-0 z-40 border-b border-border/80 bg-body/95 backdrop-blur;
+  @apply sticky top-0 z-40 border-b border-border/75 bg-body/90 shadow-[0_1px_0_0_rgba(15,34,60,0.04)] backdrop-blur-md;
 }
 
 .navbar-wrapper {
@@ -24,7 +24,7 @@
 }
 
 .navbar-nav {
-  @apply mt-2 border-t border-border/70 pt-2 text-left md:mt-0 md:flex-1 md:border-0 md:pt-0;
+  @apply mt-3 rounded-xl border border-border/80 bg-white/90 p-2 text-left shadow-sm md:mt-0 md:flex-1 md:border-0 md:bg-transparent md:p-0 md:shadow-none;
 }
 
 .nav-item {
@@ -32,11 +32,11 @@
 }
 
 .nav-link {
-  @apply block whitespace-nowrap rounded-md px-3 py-2 text-[1rem] font-semibold text-dark transition hover:bg-light hover:text-primary;
+  @apply block whitespace-nowrap rounded-lg px-3 py-2 text-[1rem] font-semibold text-dark transition-all duration-200 hover:bg-light hover:text-primary;
 }
 
 .nav-dropdown-list {
-  @apply z-10 rounded-lg bg-white px-6 py-3 shadow transition;
+  @apply z-10 rounded-xl border border-border/70 bg-white px-4 py-3 shadow transition;
 }
 
 .nav-dropdown-item {
@@ -44,7 +44,7 @@
 }
 
 .nav-dropdown-link {
-  @apply block min-w-[150px] py-1 text-[17px] font-semibold text-dark transition hover:text-primary;
+  @apply block min-w-[160px] rounded-md px-2 py-2 text-[16px] font-semibold text-dark transition hover:bg-light hover:text-primary;
 }
 
 /* search style */

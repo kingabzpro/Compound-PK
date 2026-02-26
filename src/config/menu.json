@@ -1,16 +1,16 @@
 {
   "main": [
     {
-      "name": "Home",
-      "url": "/"
+      "name": "Mindset",
+      "url": "/categories/mindset"
     },
     {
-      "name": "Blog",
-      "url": "/#latest-articles"
+      "name": "Pakistan",
+      "url": "/categories/pakistan-investing"
     },
     {
-      "name": "About",
-      "url": "/about"
+      "name": "Global",
+      "url": "/categories/global-investing"
     }
   ],
   "footer": [
