@@ -172,6 +172,12 @@ const { title, meta_title, description, image, noindex, canonical } =
       )
     }
 
+    <a
+      href="#main-content"
+      class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[70] focus:rounded-md focus:bg-dark focus:px-4 focus:py-2 focus:text-white"
+    >
+      Skip to main content
+    </a>
     <Header />
     <main id="main-content" class="min-h-[60vh]">
       <slot />

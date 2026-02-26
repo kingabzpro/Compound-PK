@@ -11,6 +11,21 @@ const entry = (await getEntry(
 )) as CollectionEntry<"contact">;
 const { contact_form_action } = config.params;
 const { title, description, meta_title, image } = entry.data;
+const submissionStatus = Astro.url.searchParams.get("status");
+const statusMessage =
+  submissionStatus === "success"
+    ? {
+        className:
+          "mb-6 rounded-md border border-emerald-200 bg-emerald-50 px-4 py-3 text-emerald-900",
+        text: "Thanks for reaching out. Your message was sent successfully.",
+      }
+    : submissionStatus === "error"
+      ? {
+          className:
+            "mb-6 rounded-md border border-red-200 bg-red-50 px-4 py-3 text-red-900",
+          text: "We could not submit the form right now. Please try again in a moment.",
+        }
+      : null;
 ---
 
 <Base
@@ -23,19 +38,36 @@ const { title, description, meta_title, image } = entry.data;
     <div class="container">
       <h1 set:html={markdownify(title)} class="h2 page-heading" />
       <div class="mx-auto max-w-3xl">
+          {
+            statusMessage && (
+              <p class={statusMessage.className} role="status" aria-live="polite">
+                {statusMessage.text}
+              </p>
+            )
+          }
+          <p class="mb-6 text-text">
+            Share your question, topic request, or feedback. We read every message.
+          </p>
           <form
             class="contact-form row gy-2 justify-center"
             method="POST"
             action={contact_form_action}
           >
+            <input
+              type="hidden"
+              name="_subject"
+              value="New message from Compound PK contact form"
+            />
             <div class="lg:col-6">
               <label class="mb-2 block" for="name"
                 >Name <span class="text-red-600">*</span></label
               >
               <input
                 class="form-input w-full"
+                id="name"
                 name="name"
                 type="text"
+                autocomplete="name"
                 required
               />
             </div>
@@ -45,14 +77,21 @@ const { title, description, meta_title, image } = entry.data;
               >
               <input
                 class="form-input w-full"
+                id="email"
                 name="email"
                 type="email"
+                autocomplete="email"
                 required
               />
             </div>
             <div class="col-12">
               <label class="mb-2 block" for="subject">Subject</label>
-              <input class="form-input w-full" name="subject" type="text" />
+              <input
+                class="form-input w-full"
+                id="subject"
+                name="subject"
+                type="text"
+              />
             </div>
             <div class="col-12">
               <label class="mb-2 block" for="message"
@@ -60,13 +99,17 @@ const { title, description, meta_title, image } = entry.data;
               >
               <textarea
                 class="form-textarea w-full"
+                id="message"
                 name="message"
                 rows="4"
                 required
               ></textarea>
             </div>
             <div class="col-12">
-              <button class="btn btn-primary mt-2">Submit Now</button>
+              <button class="btn btn-primary mt-2">Send message</button>
+              <p class="mt-3 text-sm text-text/80">
+                No spam. This form is only used for direct replies from the Compound PK team.
+              </p>
             </div>
           </form>
       </div>
