@@ -1,7 +1,7 @@
 ---
 title: "Case Study: How a Karachi Couple Built Their First PKR 5 Million Portfolio"
 meta_title: "Case Study: Karachi Couple FIRE Progress | Compound PK"
-description: "A realistic FIRE case study showing how income discipline, asset allocation, and consistency can build momentum in Pakistan."
+description: "A realistic Pakistan case study showing how policy based saving, allocation discipline, and income growth can reach PKR 5 million."
 date: 2026-01-20T16:56:47+06:00
 image: "/images/posts/06.jpg"
 draft: false
@@ -10,41 +10,85 @@ tags: ["case-study", "fire", "asset-allocation", "pakistan-investing"]
 categories: ["Case Studies"]
 ---
 
-This is a simplified educational case study, not personal financial advice.
+This is an educational simulation based on common household patterns in Karachi. It is not personal financial advice.
 
-A Karachi-based couple in their early 30s wanted optional work by their mid-40s. They started with inconsistent savings and no clear allocation policy.
+The purpose is to show how ordinary households can build meaningful portfolio size through process quality rather than speculative trading.
 
-## Starting point
+## Household profile at the start
 
-- Household net income: moderate but stable.
-- Savings rate: below 15%.
-- Investing behavior: ad hoc, event-driven.
+- Two working adults in early thirties.
+- Stable but moderate income growth potential.
+- Savings rate below 15 percent.
+- No written investment policy.
 
-## What changed in year 1
+Their core problem was not low intelligence. Their core problem was inconsistent execution.
 
-1. Savings moved to salary day automation.
-2. Portfolio policy was documented on one page.
-3. Monthly investment amount increased each quarter.
-4. Lifestyle inflation was capped after bonuses.
+## Year one: process before performance
 
-## Allocation framework
+The couple made four operational changes in the first year:
 
-- Growth bucket: diversified equity exposure.
-- Stability bucket: emergency cash and fixed-income instruments.
-- Skill bucket: courses and certifications to increase future income.
+1. Salary day auto transfer to investments.
+2. Mandatory emergency cash target before aggressive growth allocation.
+3. One page household investment policy with rebalancing rules.
+4. Quarterly review meeting with written decisions.
 
-## Outcome after sustained execution
+These decisions reduced behavioral errors and removed guesswork.
 
-Within a few years, they crossed PKR 5 million in invested assets, mostly through consistency rather than aggressive stock picking. Their bigger win was behavioral: no panic selling, no hot-tip chasing, and no long investing gaps.
+## Allocation framework they adopted
 
-## What this case teaches
+| Bucket | Role in plan | Control rule |
+| --- | --- | --- |
+| Growth assets | Long-run compounding | Add monthly, review quarterly |
+| Stability assets | Short-term resilience | Maintain minimum emergency reserve |
+| Skill capital | Future income expansion | Fund courses and certifications annually |
 
-- Systems beat motivation.
-- A clear allocation policy prevents emotional decisions.
-- Rising income should feed investments, not only lifestyle upgrades.
+This three bucket model kept the plan balanced between today and tomorrow.
+
+## How they handled volatility
+
+They pre-defined what would trigger action and what would not. Market volatility alone was not a trigger.
+
+Action triggers included job risk, emergency cash deficiency, or major family obligations. Everything else followed the default contribution schedule.
+
+## Progress path to PKR 5 million
+
+Portfolio growth came from three engines:
+
+- Consistent contributions.
+- Stepwise contribution increases after income gains.
+- Avoidance of large behavioral mistakes.
+
+Stock picking was a minor driver. Process continuity was the major driver.
+
+## Lessons for similar households
+
+### Lesson 1: Policy beats mood
+
+If rules are written before stress, decisions stay rational during stress.
+
+### Lesson 2: Income growth must be captured
+
+When earnings rise, portfolio contributions should rise automatically.
+
+### Lesson 3: Emergency liquidity protects long-run capital
+
+Without liquidity, every unexpected expense can break the investment plan.
+
+## Common errors they avoided
+
+- Chasing short-term social media tips.
+- Large allocation shifts based on recent news.
+- Treating bonuses as spending only.
+- Skipping portfolio reviews for long periods.
+
+## Final takeaway
+
+A household does not need perfect market forecasts to build strong capital. It needs a repeatable system that survives normal life disruptions.
 
 ## Further reading
 
-- [Vanguard: What is diversification?](https://investor.vanguard.com/investor-resources-education/understanding-investment-types/what-is-diversification)
-- [Fidelity: Dollar-cost averaging](https://www.fidelity.com/learning-center/trading-investing/dollar-cost-averaging)
-- [SECP Investor Education](https://jamapunji.pk/)
+- [JamaPunji investor education portal](https://jamapunji.pk/)
+- [PSX Investor Awareness Guide](https://www.psx.com.pk/psx/resources-and-tools/investors/investor-awareness-guide)
+- [SECP scams and fraud alerts](https://www.secp.gov.pk/category/media-center/awareness-campaigns/scams-fraud-alerts/)
+- [Investor.gov guide to saving and investing](https://www.investor.gov/build-wealth-over-time-through-saving-and-investing)
+- [Fidelity overview of dollar cost averaging](https://www.fidelity.com/learning-center/trading-investing/dollar-cost-averaging)
