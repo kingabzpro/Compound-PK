@@ -10,17 +10,25 @@ import { humanize } from "@/lib/utils/textConverter";
 const categoryTitleMap: Record<string, string> = {
   mindset: "Mindset",
   "pakistan-investing": "Pakistan Investing",
-  "global-etfs": "Global ETFs",
+  "global-investing": "Global Investing",
   "savings-income": "Savings & Income",
   calculators: "Calculators",
   "case-studies": "Case Studies",
 };
+const featuredCategories = [
+  { slug: "mindset", title: "Mindset" },
+  { slug: "pakistan-investing", title: "Pakistan Investing" },
+  { slug: "global-investing", title: "Global Investing" },
+  { slug: "savings-income", title: "Savings & Income" },
+  { slug: "calculators", title: "Calculators" },
+  { slug: "case-studies", title: "Case Studies" },
+];
 
 export async function getStaticPaths() {
   const compoundPkCategories = [
     "mindset",
     "pakistan-investing",
-    "global-etfs",
+    "global-investing",
     "savings-income",
     "calculators",
     "case-studies",
@@ -45,13 +53,20 @@ const title =
   category && categoryTitleMap[category]
     ? categoryTitleMap[category]
     : humanize(category || "");
+const relatedCategories = featuredCategories.filter((item) => item.slug !== category);
 ---
 
 <Base title={title || "Category"}>
   <div class="section">
     <div class="container">
-      <p class="text-center text-2xl mb-4">Showing Posts From</p>
-      <h1 class="h2 mb-16 text-center text-primary">{title}</h1>
+      <p class="mb-3 text-center text-sm font-semibold uppercase tracking-[0.16em] text-primary">
+        Category Archive
+      </p>
+      <h1 class="h2 mb-4 text-center">{title}</h1>
+      <p class="mx-auto mb-12 max-w-2xl text-center text-text">
+        {sortedPosts.length} {sortedPosts.length === 1 ? "article" : "articles"} in
+        this category.
+      </p>
       {
         sortedPosts.length > 0 ? (
           <Posts posts={sortedPosts} fluid={false} />
@@ -61,6 +76,29 @@ const title =
           </p>
         )
       }
+      <div class="mt-14 rounded-2xl border border-border bg-light p-6">
+        <p class="mb-3 text-sm font-semibold uppercase tracking-[0.12em] text-primary">
+          Browse Other Categories
+        </p>
+        <div class="flex flex-wrap gap-3">
+          {
+            relatedCategories.map((item) => (
+              <a
+                href={`/categories/${item.slug}`}
+                class="rounded-full border border-border bg-white px-4 py-2 text-sm font-semibold text-dark transition hover:border-primary hover:text-primary"
+              >
+                {item.title}
+              </a>
+            ))
+          }
+          <a
+            href="/search"
+            class="rounded-full border border-border bg-white px-4 py-2 text-sm font-semibold text-dark transition hover:border-primary hover:text-primary"
+          >
+            Search Articles
+          </a>
+        </div>
+      </div>
     </div>
   </div>
 </Base>

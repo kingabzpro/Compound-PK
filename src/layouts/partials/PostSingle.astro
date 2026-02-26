@@ -114,8 +114,38 @@ const { title, description, authors, categories, image, date, tags } =
             className="social-share mb-4"
             title={title}
             description={description}
-            slug={post.id}
+            slug={`blog/${post.id}`}
           />
+        </div>
+        <div class="mt-10 rounded-2xl border border-border bg-light p-6">
+          <p class="mb-2 text-sm font-semibold uppercase tracking-[0.12em] text-primary">
+            Continue Reading
+          </p>
+          <h3 class="h5 mb-4">Pick your next step</h3>
+          <div class="flex flex-wrap gap-3">
+            {
+              categories.map((category: string) => (
+                <a
+                  href={`/categories/${slugify(category)}`}
+                  class="rounded-full border border-border bg-white px-4 py-2 text-sm font-semibold text-dark transition hover:border-primary hover:text-primary"
+                >
+                  {humanize(category)}
+                </a>
+              ))
+            }
+            <a
+              href="/categories"
+              class="rounded-full border border-border bg-white px-4 py-2 text-sm font-semibold text-dark transition hover:border-primary hover:text-primary"
+            >
+              All Categories
+            </a>
+            <a
+              href="/search"
+              class="rounded-full border border-border bg-white px-4 py-2 text-sm font-semibold text-dark transition hover:border-primary hover:text-primary"
+            >
+              Search Articles
+            </a>
+          </div>
         </div>
       </div>
     </article>

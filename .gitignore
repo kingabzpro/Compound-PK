@@ -27,3 +27,5 @@ package-lock.json
 # local editor and tooling
 .vscode/
 codex-skills/
+.playwright-cli/
+output/playwright/

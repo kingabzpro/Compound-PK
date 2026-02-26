@@ -4,7 +4,7 @@ meta_title: "Global ETFs from Pakistan: A Simple Diversification Playbook | Comp
 description: "How Pakistani investors can think about global ETF diversification, currency exposure, and execution discipline."
 date: 2026-01-14T06:00:00+00:00
 image: "/images/posts/03.jpg"
-categories: ["Global ETFs"]
+categories: ["Global Investing"]
 authors: ["Abid Ali Awan"]
 tags: ["global-etfs", "diversification", "usd", "fire"]
 draft: false

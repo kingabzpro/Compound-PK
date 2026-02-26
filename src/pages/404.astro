@@ -1,17 +1,41 @@
 ---
 import Base from "@/layouts/Base.astro";
+import menu from "@/config/menu.json";
+
+const topCategories = menu.main.slice(0, 3);
 ---
 
 <Base title="Page Not Found">
   <section class="section">
     <div class="container">
-      <div class="flex h-[40vh] items-center justify-center">
-        <div class="text-center">
+      <div class="flex min-h-[40vh] items-center justify-center">
+        <div class="max-w-2xl text-center">
           <h1 class="h2 md:h1 mb-4">Error 404</h1>
-          <div class="content">
-            <p>Page Not Found</p>
+          <div class="content mb-8">
+            <p>The page you requested does not exist or may have moved.</p>
           </div>
-          <a href="/" class="btn btn-primary mt-8">Back to home</a>
+          <div class="mb-6 flex flex-wrap justify-center gap-3">
+            <a href="/" class="btn btn-primary">Back to home</a>
+            <a href="/search" class="btn btn-outline-primary">Search articles</a>
+            <a href="/#latest-articles" class="btn btn-outline-primary">Latest posts</a>
+          </div>
+          <p class="mb-3 text-sm font-semibold uppercase tracking-wide text-text/70">
+            Popular categories
+          </p>
+          <ul class="flex flex-wrap justify-center gap-2">
+            {
+              topCategories.map((category) => (
+                <li>
+                  <a
+                    href={category.url}
+                    class="inline-block rounded-full border border-border px-4 py-2 text-sm transition hover:border-primary hover:text-primary"
+                  >
+                    {category.name}
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
         </div>
       </div>
     </div>

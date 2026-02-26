@@ -1,5 +1,5 @@
 import dateFormat from "@/lib/utils/dateFormat";
-import { humanize, slugify } from "@/lib/utils/textConverter";
+import { humanize, plainify, slugify } from "@/lib/utils/textConverter";
 import Fuse from "fuse.js";
 import React, { useEffect, useRef, useState } from "react";
 import { BiCalendarEdit, BiCategoryAlt } from "react-icons/bi";
@@ -26,7 +26,7 @@ export default function SearchBar({ searchList }: Props) {
     null,
   );
 
-  const handleChange = (e: React.FormEvent<HTMLInputElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputVal(e.currentTarget.value);
   };
 
@@ -67,7 +67,7 @@ export default function SearchBar({ searchList }: Props) {
     <div className="min-h-[45vh]">
       <input
         className="form-input w-full text-center"
-        placeholder="Type here to Search posts"
+        placeholder="Search articles by title, category, or tag"
         type="text"
         name="search"
         value={inputVal}
@@ -92,7 +92,7 @@ export default function SearchBar({ searchList }: Props) {
           <div key={item.slug} className={"col-12 mb-8 sm:col-6"}>
             {item.data.image && (
               <a
-                href={`/${item.slug}`}
+                href={`/blog/${item.slug}`}
                 className="rounded-lg block hover:text-primary overflow-hidden group"
               >
                 <img
@@ -132,15 +132,13 @@ export default function SearchBar({ searchList }: Props) {
 
             <h3 className="mb-2">
               <a
-                href={`/${item.slug}`}
+                href={`/blog/${item.slug}`}
                 className="block hover:text-primary transition duration-300"
               >
                 {item.data.title}
               </a>
             </h3>
-            <p className="text-text line-clamp-2">
-              {item.content}
-            </p>
+            <p className="text-text line-clamp-2">{plainify(item.content ?? "")}</p>
           </div>
         ))}
       </div>
