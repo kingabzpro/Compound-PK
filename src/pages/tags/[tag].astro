@@ -24,14 +24,53 @@ const filterByTags = taxonomyFilter(posts, "tags", tag);
 const sortedPosts = sortByDate(filterByTags);
 
 const title = humanize(tag || "");
+const allTags = await getTaxonomy("posts", "tags");
+const relatedTags = allTags.filter((item) => item !== tag).slice(0, 10);
 ---
 
 <Base title={title || "Tag"}>
   <div class="section">
     <div class="container">
-      <p class="text-center text-2xl mb-4">Showing Posts From</p>
-      <h1 class="h2 mb-16 text-center text-primary">{title}</h1>
-      <Posts posts={sortedPosts} fluid={false} />
+      <p class="mb-3 text-center text-sm font-semibold uppercase tracking-[0.16em] text-primary">
+        Tag Archive
+      </p>
+      <h1 class="h2 mb-4 text-center">{title}</h1>
+      <p class="mx-auto mb-12 max-w-2xl text-center text-text">
+        {sortedPosts.length} {sortedPosts.length === 1 ? "article" : "articles"} tagged
+        with this topic.
+      </p>
+      {
+        sortedPosts.length > 0 ? (
+          <Posts posts={sortedPosts} fluid={false} />
+        ) : (
+          <p class="text-center text-text">
+            No posts are available for this tag yet.
+          </p>
+        )
+      }
+      <div class="mt-14 rounded-2xl border border-border bg-light p-6">
+        <p class="mb-3 text-sm font-semibold uppercase tracking-[0.12em] text-primary">
+          Explore More Topics
+        </p>
+        <div class="flex flex-wrap gap-3">
+          {
+            relatedTags.map((item) => (
+              <a
+                href={`/tags/${item}`}
+                class="rounded-full border border-border bg-white px-4 py-2 text-sm font-semibold text-dark transition hover:border-primary hover:text-primary"
+              >
+                #{humanize(item)}
+              </a>
+            ))
+          }
+          <a
+            href="/categories"
+            class="rounded-full border border-border bg-white px-4 py-2 text-sm font-semibold text-dark transition hover:border-primary hover:text-primary"
+          >
+            Browse Categories
+          </a>
+        </div>
+      </div>
     </div>
   </div>
 </Base>

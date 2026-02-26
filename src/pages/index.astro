@@ -10,36 +10,105 @@ const posts = await getSinglePage("posts");
 const sortedPosts = sortByDate(posts);
 const totalPages = Math.ceil(posts.length / config.settings.pagination);
 const currentPosts = sortedPosts.slice(0, config.settings.pagination);
+const startPaths = [
+  {
+    title: "Build the Right Investing Mindset",
+    description:
+      "Start with long-term habits before products. Avoid short-term noise and costly mistakes.",
+    url: "/categories/mindset",
+    cta: "Explore Mindset",
+  },
+  {
+    title: "Start Investing in Pakistan",
+    description:
+      "Learn the first practical actions, account setup flow, and decision framework for beginners.",
+    url: "/categories/pakistan-investing",
+    cta: "Start Pakistan Investing",
+  },
+  {
+    title: "Add Global Diversification",
+    description:
+      "Understand global market exposure and how to layer international assets into a FIRE plan.",
+    url: "/categories/global-investing",
+    cta: "Explore Global Investing",
+  },
+];
 ---
 
 <Base
   title="Compound PK"
   description="Long-term investing, simplified. Practical investing strategies for Pakistanis pursuing financial independence."
 >
-  <section class="section pb-10">
+  <section class="section pb-8 pt-10">
     <div class="container">
-      <div class="rounded-2xl border border-border bg-light px-6 py-10 md:px-12 md:py-14">
-        <p class="mb-4 text-sm font-semibold uppercase tracking-[0.2em] text-primary">
+      <div class="relative overflow-hidden rounded-3xl border border-border bg-light px-6 py-10 md:px-12 md:py-14">
+        <div class="pointer-events-none absolute -right-24 -top-24 h-56 w-56 rounded-full bg-primary opacity-10" />
+        <div class="pointer-events-none absolute -left-16 -bottom-16 h-44 w-44 rounded-full bg-dark opacity-5" />
+
+        <p class="relative mb-4 text-sm font-semibold uppercase tracking-[0.2em] text-primary">
           Long-term investing, simplified.
         </p>
-        <h1 class="h2 mb-4 max-w-3xl">Build Wealth. Retire Early. Stay Free.</h1>
-        <p class="mb-8 max-w-2xl text-lg text-text">
+        <h1 class="h2 relative mb-4 max-w-3xl">
+          Build Wealth. Retire Early. Stay Free.
+        </h1>
+        <p class="relative mb-8 max-w-2xl text-lg text-text">
           Practical investing strategies for Pakistanis pursuing financial
           independence.
         </p>
-        <div class="flex flex-wrap gap-4">
+        <div class="relative flex flex-wrap gap-4">
           <a href="/categories/mindset" class="btn btn-primary">Start Here</a>
-          <a href="/#latest-articles" class="btn btn-outline-primary">
-            Read Latest Articles
+          <a href="/categories" class="btn btn-outline-primary">
+            Browse Categories
           </a>
         </div>
       </div>
     </div>
   </section>
 
-  <section id="latest-articles" class="section pt-10">
+  <section class="section pb-8 pt-4">
     <div class="container">
-      <h2 class="h3 mb-10">Latest Articles</h2>
+      <div class="mb-8 flex flex-wrap items-end justify-between gap-3">
+        <div>
+          <p class="mb-2 text-sm font-semibold uppercase tracking-[0.16em] text-primary">
+            Start With A Path
+          </p>
+          <h2 class="h3">Choose your next investing step</h2>
+        </div>
+        <a href="/categories" class="text-sm font-semibold text-primary hover:text-dark">
+          View all categories
+        </a>
+      </div>
+      <div class="row gy-4">
+        {
+          startPaths.map((path) => (
+            <div class="col-12 md:col-6 lg:col-4">
+              <article class="h-full rounded-2xl border border-border bg-white p-6">
+                <h3 class="h5 mb-3">{path.title}</h3>
+                <p class="mb-6 text-text">{path.description}</p>
+                <a href={path.url} class="font-semibold text-primary hover:text-dark">
+                  {path.cta}
+                </a>
+              </article>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section id="latest-articles" class="section pt-8">
+    <div class="container">
+      <div class="mb-10 flex flex-wrap items-end justify-between gap-3">
+        <div>
+          <p class="mb-2 text-sm font-semibold uppercase tracking-[0.16em] text-primary">
+            Latest Articles
+          </p>
+          <h2 class="h3">Recent posts for long-term investors</h2>
+        </div>
+        <a href="/search" class="text-sm font-semibold text-primary hover:text-dark">
+          Search all posts
+        </a>
+      </div>
       <Posts posts={currentPosts} className="mb-16" />
       <Pagination currentPage={1} totalPages={totalPages} />
     </div>
