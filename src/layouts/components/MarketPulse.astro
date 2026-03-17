@@ -88,9 +88,10 @@ const shortDateFormatter = new Intl.DateTimeFormat("en-GB", {
   timeZone: "Asia/Karachi",
 });
 
-const shortTimeFormatter = new Intl.DateTimeFormat("en-US", {
+const shortTimeFormatter = new Intl.DateTimeFormat("en-PK", {
   hour: "numeric",
   minute: "2-digit",
+  hour12: true,
   timeZone: "Asia/Karachi",
 });
 
@@ -155,6 +156,15 @@ function formatShortTime(date: Date) {
   return shortTimeFormatter.format(date);
 }
 
+function getKarachiDayKey(date: Date) {
+  return new Intl.DateTimeFormat("en-CA", {
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    timeZone: "Asia/Karachi",
+  }).format(date);
+}
+
 function parseLooseDate(value: string) {
   const nativeDate = new Date(value);
   if (!Number.isNaN(nativeDate.valueOf())) {
@@ -193,8 +203,9 @@ function formatUpdateStamp(input: Date | string | number) {
     return "Live";
   }
 
-  const ageMs = Date.now() - parsedDate.valueOf();
-  return ageMs >= 24 * 60 * 60 * 1000 ? formatShortDate(parsedDate) : formatShortTime(parsedDate);
+  return getKarachiDayKey(parsedDate) === getKarachiDayKey(new Date())
+    ? formatShortTime(parsedDate)
+    : formatShortDate(parsedDate);
 }
 
 async function getYahooQuote(symbol: string) {
@@ -488,21 +499,31 @@ const marketTiles: MarketTile[] = defaultTiles.map((tile) => ({
         return "Live";
       }
 
-      const ageMs = Date.now() - parsedDate.valueOf();
-      return ageMs >= 24 * 60 * 60 * 1000
-        ? new Intl.DateTimeFormat("en-GB", {
-            day: "2-digit",
-            month: "short",
-            year: "2-digit",
-            timeZone: "Asia/Karachi",
-          })
-            .format(parsedDate)
-            .replace(/ /g, "-")
-        : new Intl.DateTimeFormat("en-US", {
-            hour: "numeric",
-            minute: "2-digit",
-            timeZone: "Asia/Karachi",
-          }).format(parsedDate);
+      const karachiDayKey = (date: Date) =>
+        new Intl.DateTimeFormat("en-CA", {
+          year: "numeric",
+          month: "2-digit",
+          day: "2-digit",
+          timeZone: "Asia/Karachi",
+        }).format(date);
+
+      if (karachiDayKey(parsedDate) === karachiDayKey(new Date())) {
+        return new Intl.DateTimeFormat("en-PK", {
+          hour: "numeric",
+          minute: "2-digit",
+          hour12: true,
+          timeZone: "Asia/Karachi",
+        }).format(parsedDate);
+      }
+
+      return new Intl.DateTimeFormat("en-GB", {
+        day: "2-digit",
+        month: "short",
+        year: "2-digit",
+        timeZone: "Asia/Karachi",
+      })
+        .format(parsedDate)
+        .replace(/ /g, "-");
     };
 
     const setTile = (key: string, next: TileUpdate) => {
