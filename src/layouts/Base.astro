@@ -31,6 +31,14 @@ export interface Props {
 // distructure frontmatters
 const { title, meta_title, description, image, noindex, canonical } =
   Astro.props;
+const siteUrl = new URL(config.site.base_url);
+const pageUrl = canonical
+  ? new URL(canonical, siteUrl).toString()
+  : new URL(Astro.url.pathname, siteUrl).toString();
+const metaImageUrl = new URL(
+  image ? image : config.metadata.meta_image,
+  siteUrl,
+).toString();
 ---
 
 <!doctype html>
@@ -98,10 +106,17 @@ const { title, meta_title, description, image, noindex, canonical } =
     </title>
 
     <!-- canonical url -->
-    {canonical && <link rel="canonical" href={canonical} item-prop="url" />}
+    <link rel="canonical" href={pageUrl} item-prop="url" />
 
-    <!-- noindex robots -->
-    {noindex && <meta name="robots" content="noindex,nofollow" />}
+    <!-- robots -->
+    <meta
+      name="robots"
+      content={
+        noindex
+          ? "noindex,nofollow"
+          : "index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1"
+      }
+    />
 
     <!-- meta-description -->
     <meta
@@ -132,10 +147,7 @@ const { title, meta_title, description, image, noindex, canonical } =
       )}
     />
     <meta property="og:type" content="website" />
-    <meta
-      property="og:url"
-      content={`${config.site.base_url}/${Astro.url.pathname.replace("/", "")}`}
-    />
+    <meta property="og:url" content={pageUrl} />
 
     <!-- twitter-title -->
     <meta
@@ -154,20 +166,10 @@ const { title, meta_title, description, image, noindex, canonical } =
     />
 
     <!-- og-image -->
-    <meta
-      property="og:image"
-      content={`${config.site.base_url}${
-        image ? image : config.metadata.meta_image
-      }`}
-    />
+    <meta property="og:image" content={metaImageUrl} />
 
     <!-- twitter-image -->
-    <meta
-      name="twitter:image"
-      content={`${config.site.base_url}${
-        image ? image : config.metadata.meta_image
-      }`}
-    />
+    <meta name="twitter:image" content={metaImageUrl} />
     <meta name="twitter:card" content="summary_large_image" />
   </head>
   <body>
