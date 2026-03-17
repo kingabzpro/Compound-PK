@@ -6,6 +6,7 @@ import Footer from "@/partials/Footer.astro";
 import Header from "@/partials/Header.astro";
 import "@/styles/main.css";
 import Analytics from "@vercel/analytics/astro";
+import SpeedInsights from "@vercel/speed-insights/astro";
 import { AstroFont } from "astro-font";
 import { ClientRouter } from "astro:transitions";
 
@@ -200,5 +201,6 @@ const metaImageUrl = new URL(
     </main>
     <Footer />
     <Analytics />
+    <SpeedInsights />
   </body>
 </html>
