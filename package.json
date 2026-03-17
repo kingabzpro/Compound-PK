@@ -17,6 +17,7 @@
     "@astrojs/react": "^5.0.0",
     "@astrojs/sitemap": "^3.7.1",
     "@justinribeiro/lite-youtube": "^1.8.2",
+    "@vercel/analytics": "^2.0.1",
     "astro": "^6.0.3",
     "astro-auto-import": "^0.5.1",
     "astro-font": "^1.1.0",
