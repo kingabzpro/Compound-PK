@@ -1,0 +1,566 @@
+---
+import {
+  BiLineChart,
+  BiSolidBank,
+  BiSolidDollarCircle,
+  BiSolidDroplet,
+  BiSolidMedal,
+} from "react-icons/bi";
+
+type MarketTile = {
+  key: string;
+  label: string;
+  sourceUrl: string;
+  accentClass: string;
+  icon: typeof BiLineChart;
+  value: string;
+  change: string;
+  asOf: string;
+};
+
+type SeedUpdate = Partial<Pick<MarketTile, "value" | "change" | "asOf">>;
+
+const defaultTiles: Omit<MarketTile, "value" | "change" | "asOf">[] = [
+  {
+    key: "kmi30",
+    label: "KMI 30",
+    sourceUrl: "https://dps.psx.com.pk/dataportal/",
+    accentClass: "bg-primary/12 text-primary",
+    icon: BiLineChart,
+  },
+  {
+    key: "gold",
+    label: "Gold",
+    sourceUrl: "https://api.gold-api.com/price/XAU",
+    accentClass: "bg-amber-100 text-amber-700",
+    icon: BiSolidMedal,
+  },
+  {
+    key: "silver",
+    label: "Silver",
+    sourceUrl: "https://api.gold-api.com/price/XAG",
+    accentClass: "bg-slate-200 text-slate-700",
+    icon: BiSolidMedal,
+  },
+  {
+    key: "crude",
+    label: "Brent",
+    sourceUrl: "https://finance.yahoo.com/quote/BZ=F/",
+    accentClass: "bg-rose-100 text-rose-700",
+    icon: BiSolidDroplet,
+  },
+  {
+    key: "kibor",
+    label: "KIBOR 3M",
+    sourceUrl: "https://www.sbp.org.pk/ecodata/FER/index.asp",
+    accentClass: "bg-sky-100 text-sky-700",
+    icon: BiSolidBank,
+  },
+  {
+    key: "usdPkr",
+    label: "USD/PKR",
+    sourceUrl: "https://open.er-api.com/v6/latest/USD",
+    accentClass: "bg-emerald-100 text-emerald-700",
+    icon: BiSolidDollarCircle,
+  },
+];
+
+const fallbackSeed: Record<string, SeedUpdate> = {
+  kmi30: { value: "Live", change: "Latest", asOf: "Official feed" },
+  gold: { value: "Loading", change: "Latest", asOf: "Live feed" },
+  silver: { value: "Loading", change: "Latest", asOf: "Live feed" },
+  crude: { value: "Loading", change: "Latest", asOf: "Live feed" },
+  kibor: { value: "Live", change: "Latest", asOf: "Official feed" },
+  usdPkr: { value: "Loading", change: "Latest", asOf: "Live feed" },
+};
+
+const TOLA_PER_TROY_OUNCE = 0.375;
+
+const currencyFormatter = new Intl.NumberFormat("en-US", {
+  maximumFractionDigits: 2,
+  minimumFractionDigits: 2,
+});
+
+const shortDateFormatter = new Intl.DateTimeFormat("en-GB", {
+  day: "2-digit",
+  month: "short",
+  year: "2-digit",
+  timeZone: "Asia/Karachi",
+});
+
+const shortTimeFormatter = new Intl.DateTimeFormat("en-US", {
+  hour: "numeric",
+  minute: "2-digit",
+  timeZone: "Asia/Karachi",
+});
+
+async function fetchText(url: string) {
+  const response = await fetch(url, {
+    headers: {
+      "user-agent": "Compound PK market pulse",
+    },
+  });
+
+  if (!response.ok) {
+    throw new Error(`Failed to fetch ${url}: ${response.status}`);
+  }
+
+  return response.text();
+}
+
+async function fetchJson<T>(url: string) {
+  const response = await fetch(url, {
+    headers: {
+      "user-agent": "Compound PK market pulse",
+    },
+  });
+
+  if (!response.ok) {
+    throw new Error(`Failed to fetch ${url}: ${response.status}`);
+  }
+
+  return (await response.json()) as T;
+}
+
+function formatNumber(value: number) {
+  return currencyFormatter.format(value);
+}
+
+function formatPkr(value: number) {
+  return `PKR ${formatNumber(value)}`;
+}
+
+function formatUsd(value: number) {
+  return `USD ${formatNumber(value)}`;
+}
+
+function formatPercentChange(value: number) {
+  return `${value >= 0 ? "+" : ""}${value.toFixed(2)}%`;
+}
+
+function normalizePercentLabel(value: string) {
+  const trimmed = value.trim();
+  if (trimmed.startsWith("+") || trimmed.startsWith("-")) {
+    return trimmed;
+  }
+
+  return `+${trimmed}`;
+}
+
+function formatShortDate(date: Date) {
+  return shortDateFormatter.format(date).replace(/ /g, "-");
+}
+
+function formatShortTime(date: Date) {
+  return shortTimeFormatter.format(date);
+}
+
+function parseLooseDate(value: string) {
+  const nativeDate = new Date(value);
+  if (!Number.isNaN(nativeDate.valueOf())) {
+    return nativeDate;
+  }
+
+  const shortDateMatch = value.match(/^(\d{1,2})-([A-Za-z]{3})-(\d{2,4})$/);
+  if (!shortDateMatch) {
+    return undefined;
+  }
+
+  const [, day, month, year] = shortDateMatch;
+  const monthIndex = ["jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"].indexOf(
+    month.toLowerCase(),
+  );
+
+  if (monthIndex === -1) {
+    return undefined;
+  }
+
+  const fullYear = year.length === 2 ? 2000 + Number(year) : Number(year);
+  const parsedDate = new Date(Date.UTC(fullYear, monthIndex, Number(day), 12, 0, 0));
+
+  return Number.isNaN(parsedDate.valueOf()) ? undefined : parsedDate;
+}
+
+function formatUpdateStamp(input: Date | string | number) {
+  const parsedDate =
+    input instanceof Date
+      ? input
+      : typeof input === "string"
+        ? parseLooseDate(input)
+        : new Date(input);
+
+  if (!parsedDate || Number.isNaN(parsedDate.valueOf())) {
+    return "Live";
+  }
+
+  const ageMs = Date.now() - parsedDate.valueOf();
+  return ageMs >= 24 * 60 * 60 * 1000 ? formatShortDate(parsedDate) : formatShortTime(parsedDate);
+}
+
+async function getYahooQuote(symbol: string) {
+  const payload = await fetchJson<{
+    chart?: {
+      result?: Array<{
+        meta?: {
+          regularMarketPrice?: number;
+          chartPreviousClose?: number;
+          regularMarketTime?: number;
+        };
+      }>;
+    };
+  }>(`https://query1.finance.yahoo.com/v8/finance/chart/${symbol}?interval=1d&range=2d`);
+
+  const meta = payload.chart?.result?.[0]?.meta;
+  if (meta?.regularMarketPrice == null) {
+    throw new Error(`${symbol} quote unavailable`);
+  }
+
+  const previousClose = meta.chartPreviousClose ?? meta.regularMarketPrice;
+  const changePercent =
+    previousClose === 0
+      ? 0
+      : ((meta.regularMarketPrice - previousClose) / previousClose) * 100;
+  const marketTime = meta.regularMarketTime
+    ? new Date(meta.regularMarketTime * 1000)
+    : undefined;
+
+  return {
+    regularMarketPrice: meta.regularMarketPrice,
+    previousClose,
+    changePercent,
+    asOf: marketTime ? formatUpdateStamp(marketTime) : "Live",
+  };
+}
+
+async function getKmi30Seed(): Promise<SeedUpdate> {
+  const html = await fetchText("https://dps.psx.com.pk/dataportal/");
+  const match = html.match(
+    /KMI30<\/div><div class="topIndices__item__val">([^<]+)<\/div><\/div><div class="[^"]+"><div class="topIndices__item__change"><i class="[^"]+"><\/i>\s*([^<]+)<\/div><div class="topIndices__item__changep">\(([^)]+)\)/,
+  );
+
+  if (!match) {
+    throw new Error("KMI30 not found");
+  }
+
+  const [, value, , changePercent] = match;
+  const numericValue = Number(value.replace(/,/g, ""));
+
+  return {
+    value: Number.isFinite(numericValue) ? formatNumber(numericValue) : value.trim(),
+    change: normalizePercentLabel(changePercent),
+    asOf: formatUpdateStamp(new Date()),
+  };
+}
+
+async function getSbpFerSeed() {
+  const html = await fetchText("https://www.sbp.org.pk/ecodata/FER/index.asp");
+
+  const kiborMatch = html.match(
+    /KIBOR<br\/>\s*<span[^>]*>As on ([^<]+)<\/span><\/strong>.*?<strong>3-M<\/strong>.*?<strong>([\d.]+)<\/strong>.*?<strong>([\d.]+)<\/strong>/s,
+  );
+  const m2mMatch = html.match(
+    /As on\s*([^<]+)<\/span>.*?M2M.*?Revaluation Rate.*?<span[^>]*>([\d.]+)<\/span>.*?Bid:.*?<span[^>]*>([\d.]+)<\/span>.*?Offer:.*?<p[^>]*>([\d.]+)<\/p>/s,
+  );
+
+  return {
+    kibor:
+      kiborMatch && kiborMatch[1] && kiborMatch[2] && kiborMatch[3]
+        ? {
+            value: `${kiborMatch[2]}%`,
+            change: formatPercentChange(
+              ((Number(kiborMatch[3]) - Number(kiborMatch[2])) / Number(kiborMatch[2])) * 100,
+            ),
+            asOf: formatUpdateStamp(kiborMatch[1].trim()),
+          }
+        : undefined,
+    usdPkr:
+      m2mMatch && m2mMatch[1] && m2mMatch[2] && m2mMatch[3] && m2mMatch[4]
+        ? {
+            value: m2mMatch[2].trim(),
+            change: formatPercentChange(
+              ((Number(m2mMatch[4]) - Number(m2mMatch[3])) / Number(m2mMatch[3])) * 100,
+            ),
+            asOf: formatUpdateStamp(m2mMatch[1].trim()),
+          }
+        : undefined,
+  };
+}
+
+async function getGoldSeed(symbol: "XAU" | "XAG"): Promise<SeedUpdate> {
+  const yahooSymbol = symbol === "XAU" ? "GC=F" : "SI=F";
+  const [fxPayload, payload, yahooQuote] = await Promise.all([
+    fetchJson<{
+      rates?: { PKR?: number };
+    }>("https://open.er-api.com/v6/latest/USD"),
+    fetchJson<{
+      price: number;
+      updatedAt: string;
+    }>(`https://api.gold-api.com/price/${symbol}`),
+    getYahooQuote(yahooSymbol),
+  ]);
+
+  const date = new Date(payload.updatedAt);
+  const pkrRate = fxPayload.rates?.PKR ?? 0;
+  const pkrValue = pkrRate > 0 ? payload.price * pkrRate : payload.price;
+  const pkrPerTola = pkrValue * TOLA_PER_TROY_OUNCE;
+
+  return {
+    value: formatPkr(pkrPerTola),
+    change: formatPercentChange(yahooQuote.changePercent),
+    asOf: Number.isNaN(date.valueOf()) ? yahooQuote.asOf : formatUpdateStamp(date),
+  };
+}
+
+async function getCrudeSeed(): Promise<SeedUpdate> {
+  const quote = await getYahooQuote("BZ=F");
+
+  return {
+    value: formatUsd(quote.regularMarketPrice),
+    change: formatPercentChange(quote.changePercent),
+    asOf: quote.asOf,
+  };
+}
+
+async function getUsdPkrSeed(): Promise<SeedUpdate> {
+  const [payload, yahooQuote] = await Promise.all([
+    fetchJson<{
+      rates?: { PKR?: number };
+      time_last_update_utc?: string;
+    }>("https://open.er-api.com/v6/latest/USD"),
+    getYahooQuote("PKR=X"),
+  ]);
+
+  if (!payload.rates?.PKR) {
+    throw new Error("USD/PKR unavailable");
+  }
+
+  return {
+    value: formatNumber(payload.rates.PKR),
+    change: formatPercentChange(yahooQuote.changePercent),
+    asOf: payload.time_last_update_utc ? formatUpdateStamp(payload.time_last_update_utc) : "Live",
+  };
+}
+
+async function getSeedMap() {
+  const result: Record<string, SeedUpdate> = { ...fallbackSeed };
+  const tasks = await Promise.allSettled([
+    getKmi30Seed(),
+    getGoldSeed("XAU"),
+    getGoldSeed("XAG"),
+    getCrudeSeed(),
+    getSbpFerSeed(),
+    getUsdPkrSeed(),
+  ]);
+
+  if (tasks[0].status === "fulfilled") {
+    result.kmi30 = tasks[0].value;
+  }
+
+  if (tasks[1].status === "fulfilled") {
+    result.gold = tasks[1].value;
+  }
+
+  if (tasks[2].status === "fulfilled") {
+    result.silver = tasks[2].value;
+  }
+
+  if (tasks[3].status === "fulfilled") {
+    result.crude = tasks[3].value;
+  }
+
+  if (tasks[4].status === "fulfilled") {
+    if (tasks[4].value.kibor) {
+      result.kibor = tasks[4].value.kibor;
+    }
+
+    if (tasks[4].value.usdPkr) {
+      result.usdPkr = tasks[4].value.usdPkr;
+    }
+  }
+
+  if (tasks[5].status === "fulfilled") {
+    result.usdPkr = {
+      ...result.usdPkr,
+      ...tasks[5].value,
+    };
+  }
+
+  return result;
+}
+
+const seedMap = await getSeedMap();
+const marketTiles: MarketTile[] = defaultTiles.map((tile) => ({
+  ...tile,
+  value: seedMap[tile.key]?.value ?? fallbackSeed[tile.key]?.value ?? "Live",
+  change: seedMap[tile.key]?.change ?? fallbackSeed[tile.key]?.change ?? "",
+  asOf: seedMap[tile.key]?.asOf ?? fallbackSeed[tile.key]?.asOf ?? "Live",
+}));
+---
+
+<aside
+  class="market-pulse-panel relative overflow-hidden rounded-[1.3rem] border border-primary/10 bg-white/42 p-1.5 shadow-[0_12px_28px_rgba(13,118,110,0.08)] backdrop-blur-md"
+  data-market-pulse
+>
+  <div class="pointer-events-none absolute inset-x-0 top-0 h-12 bg-gradient-to-b from-primary/8 to-transparent" />
+  <div class="relative mb-1 flex items-center justify-between gap-2">
+    <p class="mb-0 text-[0.58rem] font-semibold uppercase tracking-[0.18em] text-primary/75">
+      Market Pulse
+    </p>
+    <div class="inline-flex items-center gap-1 rounded-full border border-primary/15 bg-primary/8 px-1.5 py-0.5 text-[0.56rem] font-semibold text-primary">
+      <span class="h-1.5 w-1.5 rounded-full bg-primary shadow-[0_0_0_3px_rgba(13,118,110,0.10)]" />
+      Live
+    </div>
+  </div>
+
+  <div class="relative grid grid-cols-2 gap-1">
+    {
+      marketTiles.map((tile) => {
+        const Icon = tile.icon;
+
+        return (
+          <a
+            href={tile.sourceUrl}
+            target="_blank"
+            rel="noreferrer"
+            class="group rounded-[0.95rem] border border-white/45 bg-white/34 px-1.5 py-[0.5rem] transition duration-200 hover:-translate-y-0.5 hover:border-primary/30 hover:bg-white/55"
+            data-market-tile={tile.key}
+            title={`${tile.label}: ${tile.value}. ${tile.change}. ${tile.asOf}.`}
+          >
+            <div class="flex items-center justify-between gap-2">
+              <div class:list={["inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-lg", tile.accentClass]}>
+                <Icon className="h-3.5 w-3.5" />
+              </div>
+              <p
+                class="mb-0 text-[0.44rem] font-semibold uppercase tracking-[0.14em] text-text/40 transition group-hover:text-primary"
+                data-market-as-of
+              >
+                {tile.asOf}
+              </p>
+            </div>
+            <div class="mt-1.5 flex min-h-[3.7rem] flex-col justify-center text-left">
+              <p class="mb-0 text-[0.56rem] font-semibold uppercase tracking-[0.12em] text-text/68">
+                {tile.label}
+              </p>
+              <p
+                class="mb-0 mt-0.5 text-[0.78rem] font-bold leading-tight text-dark"
+                data-market-value
+              >
+                {tile.value}
+              </p>
+              <p class="mb-0 mt-0.5 text-[0.54rem] font-semibold leading-none text-primary/80" data-market-meta>
+                {tile.change}
+              </p>
+            </div>
+          </a>
+        );
+      })
+    }
+  </div>
+
+  <p class="relative mb-0 mt-1 text-[0.46rem] leading-3 text-text/45">
+    Sources: PSX, SBP, commodity feeds, and FX feeds.
+  </p>
+</aside>
+
+<script>
+  const pulsePanel = document.querySelector("[data-market-pulse]");
+
+  if (pulsePanel) {
+    type TileUpdate = {
+      value?: string;
+      meta?: string;
+      asOf?: string;
+    };
+
+    const TOLA_PER_TROY_OUNCE = 0.375;
+
+    const formatNumber = (value: number, decimals = 2) =>
+      new Intl.NumberFormat("en-US", {
+        minimumFractionDigits: decimals,
+        maximumFractionDigits: decimals,
+      }).format(value);
+
+    const formatUpdateStamp = (input: Date | string | number) => {
+      const parsedDate =
+        input instanceof Date ? input : typeof input === "string" ? new Date(input) : new Date(input);
+
+      if (Number.isNaN(parsedDate.valueOf())) {
+        return "Live";
+      }
+
+      const ageMs = Date.now() - parsedDate.valueOf();
+      return ageMs >= 24 * 60 * 60 * 1000
+        ? new Intl.DateTimeFormat("en-GB", {
+            day: "2-digit",
+            month: "short",
+            year: "2-digit",
+            timeZone: "Asia/Karachi",
+          })
+            .format(parsedDate)
+            .replace(/ /g, "-")
+        : new Intl.DateTimeFormat("en-US", {
+            hour: "numeric",
+            minute: "2-digit",
+            timeZone: "Asia/Karachi",
+          }).format(parsedDate);
+    };
+
+    const setTile = (key: string, next: TileUpdate) => {
+      const tile = pulsePanel.querySelector(`[data-market-tile="${key}"]`);
+      if (!tile) return;
+
+      const value = tile.querySelector("[data-market-value]");
+      const meta = tile.querySelector("[data-market-meta]");
+      const asOf = tile.querySelector("[data-market-as-of]");
+
+      if (value && next.value) value.textContent = next.value;
+      if (meta && next.meta) meta.textContent = next.meta;
+      if (asOf && next.asOf) asOf.textContent = next.asOf;
+    };
+
+    const fetchJson = async (url: string) => {
+      const response = await fetch(url, { cache: "no-store" });
+      if (!response.ok) {
+        throw new Error(`Failed to fetch ${url}`);
+      }
+      return response.json();
+    };
+
+    const refreshGold = async (key: string, symbol: "XAU" | "XAG") => {
+      const [fxPayload, payload] = await Promise.all([
+        fetchJson("https://open.er-api.com/v6/latest/USD"),
+        fetchJson(`https://api.gold-api.com/price/${symbol}`),
+      ]);
+      const updatedAt = payload.updatedAt ? new Date(payload.updatedAt) : undefined;
+      const pkrRate = fxPayload.rates?.PKR ?? 0;
+      const pkrValue = pkrRate > 0 ? payload.price * pkrRate : payload.price;
+      const pkrPerTola = pkrValue * TOLA_PER_TROY_OUNCE;
+      setTile(key, {
+        value: `PKR ${formatNumber(pkrPerTola)}`,
+        asOf:
+          updatedAt && !Number.isNaN(updatedAt.valueOf()) ? formatUpdateStamp(updatedAt) : "Live",
+      });
+    };
+
+    const refreshUsdPkr = async () => {
+      const payload = await fetchJson("https://open.er-api.com/v6/latest/USD");
+      if (!payload.rates?.PKR) return;
+
+      const updatedAt = payload.time_last_update_utc
+        ? new Date(payload.time_last_update_utc)
+        : undefined;
+
+      setTile("usdPkr", {
+        value: formatNumber(payload.rates.PKR),
+        asOf:
+          updatedAt && !Number.isNaN(updatedAt.valueOf()) ? formatUpdateStamp(updatedAt) : "Live",
+      });
+    };
+
+    Promise.allSettled([
+      refreshGold("gold", "XAU"),
+      refreshGold("silver", "XAG"),
+      refreshUsdPkr(),
+    ]);
+  }
+</script>

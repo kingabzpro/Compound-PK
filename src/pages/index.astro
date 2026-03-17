@@ -2,6 +2,7 @@
 import Posts from "@/components/Posts.astro";
 import config from "@/config/config.json";
 import Base from "@/layouts/Base.astro";
+import MarketPulse from "@/layouts/components/MarketPulse.astro";
 import Pagination from "@/layouts/components/Pagination.astro";
 import { getSinglePage } from "@/lib/contentParser.astro";
 import { sortByDate } from "@/lib/utils/sortFunctions";
@@ -41,25 +42,29 @@ const startPaths = [
 >
   <section class="section pb-8 pt-10">
     <div class="container">
-      <div class="relative overflow-hidden rounded-3xl border border-border bg-light px-6 py-10 md:px-12 md:py-14">
+      <div class="relative overflow-hidden rounded-3xl border border-border bg-light px-6 py-10 md:px-12 md:py-14 lg:min-h-[25.5rem]">
         <div class="pointer-events-none absolute -right-24 -top-24 h-56 w-56 rounded-full bg-primary opacity-10" />
         <div class="pointer-events-none absolute -left-16 -bottom-16 h-44 w-44 rounded-full bg-dark opacity-5" />
 
-        <p class="relative mb-4 text-sm font-semibold uppercase tracking-[0.2em] text-primary">
-          Long-term investing, simplified.
-        </p>
-        <h1 class="h2 relative mb-4 max-w-3xl">
-          Build Wealth. Retire Early. Stay Free.
-        </h1>
-        <p class="relative mb-8 max-w-2xl text-lg text-text">
-          Practical investing strategies for Pakistanis pursuing financial
-          independence.
-        </p>
-        <div class="relative flex flex-wrap gap-4">
-          <a href="/categories/mindset" class="btn btn-primary">Start Here</a>
-          <a href="/categories" class="btn btn-outline-primary">
-            Browse Categories
-          </a>
+        <div class="relative lg:max-w-[calc(100%-17rem)] lg:pr-8">
+          <p class="mb-4 text-sm font-semibold uppercase tracking-[0.2em] text-primary">
+            Long-term investing, simplified.
+          </p>
+          <h1 class="h2 mb-4 max-w-3xl">Build Wealth. Retire Early. Stay Free.</h1>
+          <p class="mb-8 max-w-2xl text-lg text-text">
+            Practical investing strategies for Pakistanis pursuing financial
+            independence.
+          </p>
+          <div class="flex flex-wrap gap-4">
+            <a href="/categories/mindset" class="btn btn-primary">Start Here</a>
+            <a href="/categories" class="btn btn-outline-primary">
+              Browse Categories
+            </a>
+          </div>
+        </div>
+
+        <div class="relative mt-8 lg:absolute lg:right-6 lg:top-1/2 lg:mt-0 lg:w-[15.5rem] lg:-translate-y-1/2">
+          <MarketPulse />
         </div>
       </div>
     </div>
