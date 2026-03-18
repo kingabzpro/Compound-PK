@@ -20,6 +20,18 @@ type MarketTile = {
   asOf: string;
 };
 
+function getChangeTone(change: string) {
+  if (change.startsWith("-")) {
+    return "negative";
+  }
+
+  if (change.startsWith("+")) {
+    return "positive";
+  }
+
+  return "neutral";
+}
+
 const defaultTiles: Omit<MarketTile, "value" | "change" | "asOf">[] = [
   {
     key: "kmi30",
@@ -118,7 +130,16 @@ const marketTiles: MarketTile[] = defaultTiles.map((tile) => ({
               >
                 {tile.value}
               </p>
-              <p class="mb-0 mt-0.5 text-[0.54rem] font-semibold leading-none text-primary/80" data-market-meta>
+              <p
+                class:list={[
+                  "mb-0 mt-0.5 text-[0.54rem] font-semibold leading-none",
+                  getChangeTone(tile.change) === "negative" && "text-red-600",
+                  getChangeTone(tile.change) === "positive" && "text-primary/80",
+                  getChangeTone(tile.change) === "neutral" && "text-text/55",
+                ]}
+                data-market-meta
+                data-market-tone={getChangeTone(tile.change)}
+              >
                 {tile.change}
               </p>
             </div>
@@ -145,6 +166,25 @@ const marketTiles: MarketTile[] = defaultTiles.map((tile) => ({
 
     const REFRESH_INTERVAL_MS = 60_000;
 
+    const applyChangeTone = (meta: Element, change: string) => {
+      meta.classList.remove("text-red-600", "text-primary/80", "text-text/55");
+
+      if (change.startsWith("-")) {
+        meta.classList.add("text-red-600");
+        meta.setAttribute("data-market-tone", "negative");
+        return;
+      }
+
+      if (change.startsWith("+")) {
+        meta.classList.add("text-primary/80");
+        meta.setAttribute("data-market-tone", "positive");
+        return;
+      }
+
+      meta.classList.add("text-text/55");
+      meta.setAttribute("data-market-tone", "neutral");
+    };
+
     const setTile = (key: string, next: TileUpdate) => {
       const tile = pulsePanel.querySelector(`[data-market-tile="${key}"]`);
       if (!tile) return;
@@ -155,7 +195,10 @@ const marketTiles: MarketTile[] = defaultTiles.map((tile) => ({
       const asOf = tile.querySelector("[data-market-as-of]");
 
       if (value && next.value) value.textContent = next.value;
-      if (meta && next.change) meta.textContent = next.change;
+      if (meta && next.change) {
+        meta.textContent = next.change;
+        applyChangeTone(meta, next.change);
+      }
       if (asOf && next.asOf) asOf.textContent = next.asOf;
 
       const labelText = label?.textContent?.trim() ?? key;
