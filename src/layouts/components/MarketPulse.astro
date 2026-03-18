@@ -8,10 +8,11 @@ import {
 } from "react-icons/bi";
 import { fallbackSeed, getSeedMap } from "@/lib/marketPulse";
 
+type MarketKey = "kmi30" | "gold" | "silver" | "crude" | "kibor" | "usdPkr";
+
 type MarketTile = {
-  key: string;
+  key: MarketKey;
   label: string;
-  sourceUrl: string;
   accentClass: string;
   icon: typeof BiLineChart;
   value: string;
@@ -23,42 +24,36 @@ const defaultTiles: Omit<MarketTile, "value" | "change" | "asOf">[] = [
   {
     key: "kmi30",
     label: "KMI 30",
-    sourceUrl: "https://dps.psx.com.pk/dataportal/",
     accentClass: "bg-primary/12 text-primary",
     icon: BiLineChart,
   },
   {
     key: "gold",
     label: "Gold",
-    sourceUrl: "https://api.gold-api.com/price/XAU",
     accentClass: "bg-amber-100 text-amber-700",
     icon: BiSolidMedal,
   },
   {
     key: "silver",
     label: "Silver",
-    sourceUrl: "https://api.gold-api.com/price/XAG",
     accentClass: "bg-slate-200 text-slate-700",
     icon: BiSolidMedal,
   },
   {
     key: "crude",
     label: "Brent",
-    sourceUrl: "https://finance.yahoo.com/quote/BZ=F/",
     accentClass: "bg-rose-100 text-rose-700",
     icon: BiSolidDroplet,
   },
   {
     key: "kibor",
     label: "KIBOR 3M",
-    sourceUrl: "https://www.sbp.org.pk/ecodata/FER/index.asp",
     accentClass: "bg-sky-100 text-sky-700",
     icon: BiSolidBank,
   },
   {
     key: "usdPkr",
     label: "USD/PKR",
-    sourceUrl: "https://open.er-api.com/v6/latest/USD",
     accentClass: "bg-emerald-100 text-emerald-700",
     icon: BiSolidDollarCircle,
   },
@@ -94,10 +89,7 @@ const marketTiles: MarketTile[] = defaultTiles.map((tile) => ({
         const Icon = tile.icon;
 
         return (
-          <a
-            href={tile.sourceUrl}
-            target="_blank"
-            rel="noreferrer"
+          <div
             class="group rounded-[0.95rem] border border-white/45 bg-white/34 px-1.5 py-[0.5rem] transition duration-200 hover:-translate-y-0.5 hover:border-primary/30 hover:bg-white/55"
             data-market-tile={tile.key}
             title={`${tile.label}: ${tile.value}. ${tile.change}. ${tile.asOf}.`}
@@ -130,7 +122,7 @@ const marketTiles: MarketTile[] = defaultTiles.map((tile) => ({
                 {tile.change}
               </p>
             </div>
-          </a>
+          </div>
         );
       })
     }

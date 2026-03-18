@@ -1,10 +1,4 @@
-export type SeedUpdate = {
-  value?: string;
-  change?: string;
-  asOf?: string;
-};
-
-export const fallbackSeed: Record<string, SeedUpdate> = {
+export const fallbackSeed = {
   kmi30: { value: "Live", change: "Latest", asOf: "Official feed" },
   gold: { value: "Loading", change: "Latest", asOf: "Live feed" },
   silver: { value: "Loading", change: "Latest", asOf: "Live feed" },
@@ -34,7 +28,7 @@ const shortTimeFormatter = new Intl.DateTimeFormat("en-PK", {
   timeZone: "Asia/Karachi",
 });
 
-async function fetchText(url: string) {
+async function fetchText(url) {
   const response = await fetch(url, {
     headers: {
       "user-agent": "Compound PK market pulse",
@@ -48,7 +42,7 @@ async function fetchText(url: string) {
   return response.text();
 }
 
-async function fetchJson<T>(url: string) {
+async function fetchJson(url) {
   const response = await fetch(url, {
     headers: {
       "user-agent": "Compound PK market pulse",
@@ -59,26 +53,26 @@ async function fetchJson<T>(url: string) {
     throw new Error(`Failed to fetch ${url}: ${response.status}`);
   }
 
-  return (await response.json()) as T;
+  return response.json();
 }
 
-function formatNumber(value: number) {
+function formatNumber(value) {
   return currencyFormatter.format(value);
 }
 
-function formatPkr(value: number) {
+function formatPkr(value) {
   return `PKR ${formatNumber(value)}`;
 }
 
-function formatUsd(value: number) {
+function formatUsd(value) {
   return `USD ${formatNumber(value)}`;
 }
 
-function formatPercentChange(value: number) {
+function formatPercentChange(value) {
   return `${value >= 0 ? "+" : ""}${value.toFixed(2)}%`;
 }
 
-function normalizePercentLabel(value: string) {
+function normalizePercentLabel(value) {
   const trimmed = value.trim();
   if (trimmed.startsWith("+") || trimmed.startsWith("-")) {
     return trimmed;
@@ -87,15 +81,15 @@ function normalizePercentLabel(value: string) {
   return `+${trimmed}`;
 }
 
-function formatShortDate(date: Date) {
+function formatShortDate(date) {
   return shortDateFormatter.format(date).replace(/ /g, "-");
 }
 
-function formatShortTime(date: Date) {
+function formatShortTime(date) {
   return shortTimeFormatter.format(date);
 }
 
-function getKarachiDayKey(date: Date) {
+function getKarachiDayKey(date) {
   return new Intl.DateTimeFormat("en-CA", {
     year: "numeric",
     month: "2-digit",
@@ -104,7 +98,7 @@ function getKarachiDayKey(date: Date) {
   }).format(date);
 }
 
-function parseLooseDate(value: string) {
+function parseLooseDate(value) {
   const nativeDate = new Date(value);
   if (!Number.isNaN(nativeDate.valueOf())) {
     return nativeDate;
@@ -136,14 +130,12 @@ function parseLooseDate(value: string) {
   }
 
   const fullYear = year.length === 2 ? 2000 + Number(year) : Number(year);
-  const parsedDate = new Date(
-    Date.UTC(fullYear, monthIndex, Number(day), 12, 0, 0),
-  );
+  const parsedDate = new Date(Date.UTC(fullYear, monthIndex, Number(day), 12, 0, 0));
 
   return Number.isNaN(parsedDate.valueOf()) ? undefined : parsedDate;
 }
 
-function formatUpdateStamp(input: Date | string | number) {
+function formatUpdateStamp(input) {
   const parsedDate =
     input instanceof Date
       ? input
@@ -160,18 +152,8 @@ function formatUpdateStamp(input: Date | string | number) {
     : formatShortDate(parsedDate);
 }
 
-async function getYahooQuote(symbol: string) {
-  const payload = await fetchJson<{
-    chart?: {
-      result?: Array<{
-        meta?: {
-          regularMarketPrice?: number;
-          chartPreviousClose?: number;
-          regularMarketTime?: number;
-        };
-      }>;
-    };
-  }>(
+async function getYahooQuote(symbol) {
+  const payload = await fetchJson(
     `https://query1.finance.yahoo.com/v8/finance/chart/${symbol}?interval=1d&range=2d`,
   );
 
@@ -185,9 +167,7 @@ async function getYahooQuote(symbol: string) {
     previousClose === 0
       ? 0
       : ((meta.regularMarketPrice - previousClose) / previousClose) * 100;
-  const marketTime = meta.regularMarketTime
-    ? new Date(meta.regularMarketTime * 1000)
-    : undefined;
+  const marketTime = meta.regularMarketTime ? new Date(meta.regularMarketTime * 1000) : undefined;
 
   return {
     regularMarketPrice: meta.regularMarketPrice,
@@ -196,7 +176,7 @@ async function getYahooQuote(symbol: string) {
   };
 }
 
-async function getKmi30Seed(): Promise<SeedUpdate> {
+async function getKmi30Seed() {
   const html = await fetchText("https://dps.psx.com.pk/dataportal/");
   const match = html.match(
     /KMI30<\/div><div class="topIndices__item__val">([^<]+)<\/div><\/div><div class="[^"]+"><div class="topIndices__item__change"><i class="[^"]+"><\/i>\s*([^<]+)<\/div><div class="topIndices__item__changep">\(([^)]+)\)/,
@@ -210,9 +190,7 @@ async function getKmi30Seed(): Promise<SeedUpdate> {
   const numericValue = Number(value.replace(/,/g, ""));
 
   return {
-    value: Number.isFinite(numericValue)
-      ? formatNumber(numericValue)
-      : value.trim(),
+    value: Number.isFinite(numericValue) ? formatNumber(numericValue) : value.trim(),
     change: normalizePercentLabel(changePercent),
     asOf: formatUpdateStamp(new Date()),
   };
@@ -234,9 +212,7 @@ async function getSbpFerSeed() {
         ? {
             value: `${kiborMatch[2]}%`,
             change: formatPercentChange(
-              ((Number(kiborMatch[3]) - Number(kiborMatch[2])) /
-                Number(kiborMatch[2])) *
-                100,
+              ((Number(kiborMatch[3]) - Number(kiborMatch[2])) / Number(kiborMatch[2])) * 100,
             ),
             asOf: formatUpdateStamp(kiborMatch[1].trim()),
           }
@@ -246,9 +222,7 @@ async function getSbpFerSeed() {
         ? {
             value: m2mMatch[2].trim(),
             change: formatPercentChange(
-              ((Number(m2mMatch[4]) - Number(m2mMatch[3])) /
-                Number(m2mMatch[3])) *
-                100,
+              ((Number(m2mMatch[4]) - Number(m2mMatch[3])) / Number(m2mMatch[3])) * 100,
             ),
             asOf: formatUpdateStamp(m2mMatch[1].trim()),
           }
@@ -256,16 +230,11 @@ async function getSbpFerSeed() {
   };
 }
 
-async function getGoldSeed(symbol: "XAU" | "XAG"): Promise<SeedUpdate> {
+async function getGoldSeed(symbol) {
   const yahooSymbol = symbol === "XAU" ? "GC=F" : "SI=F";
   const [fxPayload, payload, yahooQuote] = await Promise.all([
-    fetchJson<{
-      rates?: { PKR?: number };
-    }>("https://open.er-api.com/v6/latest/USD"),
-    fetchJson<{
-      price: number;
-      updatedAt: string;
-    }>(`https://api.gold-api.com/price/${symbol}`),
+    fetchJson("https://open.er-api.com/v6/latest/USD"),
+    fetchJson(`https://api.gold-api.com/price/${symbol}`),
     getYahooQuote(yahooSymbol),
   ]);
 
@@ -277,28 +246,34 @@ async function getGoldSeed(symbol: "XAU" | "XAG"): Promise<SeedUpdate> {
   return {
     value: formatPkr(pkrPerTola),
     change: formatPercentChange(yahooQuote.changePercent),
-    asOf: Number.isNaN(date.valueOf())
-      ? yahooQuote.asOf
-      : formatUpdateStamp(date),
+    asOf: Number.isNaN(date.valueOf()) ? yahooQuote.asOf : formatUpdateStamp(date),
   };
 }
 
-async function getCrudeSeed(): Promise<SeedUpdate> {
-  const quote = await getYahooQuote("BZ=F");
+async function getCrudeSeed() {
+  const crudeSymbols = ["BZ=F", "CL=F"];
+  let lastError;
 
-  return {
-    value: formatUsd(quote.regularMarketPrice),
-    change: formatPercentChange(quote.changePercent),
-    asOf: quote.asOf,
-  };
+  for (const symbol of crudeSymbols) {
+    try {
+      const quote = await getYahooQuote(symbol);
+
+      return {
+        value: formatUsd(quote.regularMarketPrice),
+        change: formatPercentChange(quote.changePercent),
+        asOf: quote.asOf,
+      };
+    } catch (error) {
+      lastError = error;
+    }
+  }
+
+  throw lastError instanceof Error ? lastError : new Error("Crude quote unavailable");
 }
 
-async function getUsdPkrSeed(): Promise<SeedUpdate> {
+async function getUsdPkrSeed() {
   const [payload, yahooQuote] = await Promise.all([
-    fetchJson<{
-      rates?: { PKR?: number };
-      time_last_update_utc?: string;
-    }>("https://open.er-api.com/v6/latest/USD"),
+    fetchJson("https://open.er-api.com/v6/latest/USD"),
     getYahooQuote("PKR=X"),
   ]);
 
@@ -309,14 +284,12 @@ async function getUsdPkrSeed(): Promise<SeedUpdate> {
   return {
     value: formatNumber(payload.rates.PKR),
     change: formatPercentChange(yahooQuote.changePercent),
-    asOf: payload.time_last_update_utc
-      ? formatUpdateStamp(payload.time_last_update_utc)
-      : "Live",
+    asOf: payload.time_last_update_utc ? formatUpdateStamp(payload.time_last_update_utc) : "Live",
   };
 }
 
 export async function getSeedMap() {
-  const result: Record<string, SeedUpdate> = { ...fallbackSeed };
+  const result = { ...fallbackSeed };
   const tasks = await Promise.allSettled([
     getKmi30Seed(),
     getGoldSeed("XAU"),
