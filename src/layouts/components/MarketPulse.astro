@@ -133,7 +133,7 @@ const marketTiles: MarketTile[] = defaultTiles.map((tile) => ({
               <p
                 class:list={[
                   "mb-0 mt-0.5 text-[0.54rem] font-semibold leading-none",
-                  getChangeTone(tile.change) === "negative" && "text-red-600",
+                  getChangeTone(tile.change) === "negative" && "text-[#b86a73]",
                   getChangeTone(tile.change) === "positive" && "text-primary/80",
                   getChangeTone(tile.change) === "neutral" && "text-text/55",
                 ]}
@@ -150,7 +150,7 @@ const marketTiles: MarketTile[] = defaultTiles.map((tile) => ({
   </div>
 
   <p class="relative mb-0 mt-1 text-[0.46rem] leading-3 text-text/45">
-    Sources: PSX, SBP, commodity feeds, and FX feeds.
+    Sources: PSX, SBP, Gold-API, Yahoo, ER-API.
   </p>
 </aside>
 
@@ -167,10 +167,10 @@ const marketTiles: MarketTile[] = defaultTiles.map((tile) => ({
     const REFRESH_INTERVAL_MS = 60_000;
 
     const applyChangeTone = (meta: Element, change: string) => {
-      meta.classList.remove("text-red-600", "text-primary/80", "text-text/55");
+      meta.classList.remove("text-[#b86a73]", "text-primary/80", "text-text/55");
 
       if (change.startsWith("-")) {
-        meta.classList.add("text-red-600");
+        meta.classList.add("text-[#b86a73]");
         meta.setAttribute("data-market-tone", "negative");
         return;
       }

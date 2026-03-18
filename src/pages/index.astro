@@ -1,6 +1,7 @@
 ---
 import Posts from "@/components/Posts.astro";
 import config from "@/config/config.json";
+import DynamicIcon from "@/helpers/DynamicIcon";
 import Base from "@/layouts/Base.astro";
 import MarketPulse from "@/layouts/components/MarketPulse.astro";
 import Pagination from "@/layouts/components/Pagination.astro";
@@ -13,25 +14,40 @@ const totalPages = Math.ceil(posts.length / config.settings.pagination);
 const currentPosts = sortedPosts.slice(0, config.settings.pagination);
 const startPaths = [
   {
+    id: "mindset",
     title: "Build the Right Investing Mindset",
     description:
       "Start with long-term habits before products. Avoid short-term noise and costly mistakes.",
     url: "/categories/mindset",
     cta: "Explore Mindset",
+    panelClass: "border-primary/10 bg-gradient-to-br from-primary/10 via-white to-primary/5",
+    inkClass: "text-primary/70",
+    iconBgClass: "bg-primary/12 text-primary",
+    icons: ["FaSeedling", "FaChartLine", "FaBullseye"],
   },
   {
+    id: "pakistan",
     title: "Start Investing in Pakistan",
     description:
       "Learn the first practical actions, account setup flow, and decision framework for beginners.",
     url: "/categories/pakistan-investing",
     cta: "Start Pakistan Investing",
+    panelClass: "border-amber-200/60 bg-gradient-to-br from-amber-100/80 via-white to-amber-50/40",
+    inkClass: "text-amber-700/75",
+    iconBgClass: "bg-amber-100 text-amber-700",
+    icons: ["FaCoins", "FaBuildingColumns", "FaArrowTrendUp"],
   },
   {
+    id: "global",
     title: "Add Global Diversification",
     description:
       "Understand global market exposure and how to layer international assets into a FIRE plan.",
     url: "/categories/global-investing",
     cta: "Explore Global Investing",
+    panelClass: "border-sky-200/60 bg-gradient-to-br from-sky-100/80 via-white to-sky-50/40",
+    inkClass: "text-sky-700/70",
+    iconBgClass: "bg-sky-100 text-sky-700",
+    icons: ["FaGlobe", "FaLayerGroup", "FaChartPie"],
   },
 ];
 ---
@@ -87,10 +103,37 @@ const startPaths = [
         {
           startPaths.map((path) => (
             <div class="col-12 md:col-6 lg:col-4">
-              <article class="h-full rounded-2xl border border-border bg-white p-6">
-                <h3 class="h5 mb-3">{path.title}</h3>
-                <p class="mb-6 text-text">{path.description}</p>
-                <a href={path.url} class="font-semibold text-primary hover:text-dark">
+              <article class="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-white p-6 transition duration-300 hover:-translate-y-1 hover:shadow-[0_24px_70px_rgba(15,52,96,0.08)]">
+                <div class={`relative mb-5 overflow-hidden rounded-[1.35rem] border px-4 py-3 ${path.panelClass}`}>
+                  <div class={`pointer-events-none flex min-h-[4.5rem] items-center justify-between gap-3 ${path.inkClass}`}>
+                    <div class={`flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl ${path.iconBgClass}`}>
+                      <DynamicIcon icon={path.icons[0]} className="block h-5.5 w-5.5" />
+                    </div>
+                    <div class="flex min-w-0 flex-1 items-center justify-end gap-2">
+                      <div class="h-px min-w-4 flex-1 bg-current opacity-15" />
+                      <div class="flex h-6 w-6 shrink-0 items-center justify-center opacity-28">
+                        <DynamicIcon icon="FaArrowRightLong" className="block h-3 w-3" />
+                      </div>
+                      <div class="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-white/80 shadow-[0_8px_24px_rgba(255,255,255,0.6)]">
+                        <div class="flex h-5 w-5 items-center justify-center">
+                          <DynamicIcon icon={path.icons[1]} className="block h-4.5 w-4.5" />
+                        </div>
+                      </div>
+                      <div class="h-px w-4 shrink-0 bg-current opacity-15" />
+                      <div class="flex h-6 w-6 shrink-0 items-center justify-center opacity-28">
+                        <DynamicIcon icon="FaArrowRightLong" className="block h-3 w-3" />
+                      </div>
+                      <div class="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-white/80 shadow-[0_8px_24px_rgba(255,255,255,0.6)]">
+                        <div class="flex h-5 w-5 items-center justify-center">
+                          <DynamicIcon icon={path.icons[2]} className="block h-4.5 w-4.5" />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <h3 class="relative h5 mb-3 max-w-[14ch]">{path.title}</h3>
+                <p class="relative mb-6 max-w-[30ch] text-text">{path.description}</p>
+                <a href={path.url} class="relative mt-auto font-semibold text-primary hover:text-dark">
                   {path.cta}
                 </a>
               </article>
