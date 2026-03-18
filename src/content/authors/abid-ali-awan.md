@@ -1,7 +1,7 @@
 ---
 title: Abid Ali Awan
 meta_title: ""
-image: /images/authors/abid-ali-awan.png
+image: /images/authors/abid-ali-awan-profile.jpg
 description: Founder of Compound PK. I write practical investing guidance for Pakistanis pursuing financial independence.
 ---
 

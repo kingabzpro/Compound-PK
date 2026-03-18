@@ -17,13 +17,13 @@ const { title, meta_title, image, what_i_do } = entry.data;
         <div class="sm:col-5 md:col-4">
           {
             image && (
-              <div class="img-cover mb-8">
+              <div class="img-cover mb-8 md:mb-0 md:mx-auto md:max-w-[19rem]">
                 <Image
                   src={image}
-                  width={295}
-                  height={395}
+                  width={720}
+                  height={900}
                   alt={title}
-                  class="rounded-lg w-full"
+                  class="aspect-[4/5] w-full rounded-2xl object-cover object-top"
                 />
               </div>
             )

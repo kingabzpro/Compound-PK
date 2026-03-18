@@ -7,32 +7,18 @@ draft: false
 
 Effective date: February 24, 2026
 
-All content on Compound PK is for educational and informational purposes only.
+Compound PK publishes educational and informational content for readers who want clearer thinking around money, investing, and financial independence.
 
-### Not financial advice
+Nothing on this website should be treated as financial, investment, tax, legal, or accounting advice. The content is general in nature and is not tailored to your personal circumstances, risk tolerance, timeline, or financial goals.
 
-Nothing on this website is financial, investment, tax, legal, or accounting advice. You should evaluate decisions with a qualified professional based on your personal situation.
+Reading, using, or relying on this website does not create an advisor-client, fiduciary, or professional services relationship with Compound PK.
 
-### No client relationship
+We aim to publish practical and well-researched material, but we do not guarantee that every article is complete, current, or error-free at all times. Markets change, products change, regulations change, and some information may become outdated after publication.
 
-Reading this website does not create an advisor-client, fiduciary, or professional services relationship.
+All investing involves risk, including the risk of loss. Past performance is not a promise of future results, and examples discussed on this site should not be read as guarantees or predictions.
 
-### Accuracy and completeness
+This website may refer to or link to third-party products, tools, platforms, or websites for context and convenience. Compound PK is not responsible for their content, availability, claims, policies, or the outcomes of using them.
 
-We aim to provide clear and practical information, but we do not guarantee that all content is complete, accurate, or up to date at all times.
+Any financial decision you make remains your responsibility. Before acting on anything you read here, you should evaluate whether it fits your situation and, where appropriate, speak with a qualified professional.
 
-### Investment risk
-
-All investing involves risk, including the possible loss of principal. Past performance does not guarantee future results.
-
-### External links
-
-This site may link to third-party tools, products, or websites. We are not responsible for their content, availability, or policies.
-
-### Personal responsibility
-
-You are responsible for your own financial decisions and outcomes.
-
-### Contact
-
-If you have questions about this disclaimer, use the Contact page on this website.
+If you have questions about this disclaimer, please use [Contact us](/contact).

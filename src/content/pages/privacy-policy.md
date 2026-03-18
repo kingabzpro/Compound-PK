@@ -7,43 +7,22 @@ draft: false
 
 Effective date: February 24, 2026
 
-Compound PK respects your privacy. This page explains what information we collect and how we use it.
+Compound PK respects your privacy and tries to keep data collection limited, practical, and tied to running the website well.
 
-### Information we collect
+We may collect basic website usage information such as page views, browser type, device details, and referring sources so we can understand how readers use the site, improve performance, and maintain reliability. If you contact us directly, we also receive the information you choose to include in your message.
 
-- Basic usage data such as page views, browser type, and referring source.
-- Information you provide directly (for example, when you contact us).
+We use this information to operate the site, improve the reading experience, understand which topics are useful to visitors, respond to direct messages, and protect the website from abuse or technical issues.
 
-### How we use information
+Compound PK may use cookies or similar tools for analytics and core site functionality. You can manage or disable cookies through your browser settings, although some website behavior may work differently if you do.
 
-- To operate and improve the website.
-- To understand which articles are useful to readers.
-- To respond to messages or support requests.
+We do not sell personal information. We may share limited data with trusted service providers that help us host, secure, or analyze the website, but only to the extent reasonably necessary to run the site.
 
-### Cookies and analytics
+We keep information only for as long as it is reasonably needed for operational, legal, or security purposes.
 
-Compound PK may use cookies or similar technologies for analytics and website performance. You can control cookies through your browser settings.
+Articles on Compound PK may link to third-party websites, tools, or products. Once you leave this site, their privacy practices and policies apply instead of ours.
 
-### Information sharing
+If you have submitted information directly and want it corrected or deleted, we will make a reasonable effort to help, subject to any legal or operational need to retain records.
 
-We do not sell your personal data. We may share limited data with service providers that help us run the site (for example, analytics or hosting providers), only as needed.
+This policy may change over time as the website evolves. When meaningful updates are made, the effective date on this page will be revised.
 
-### Data retention
-
-We keep data only as long as reasonably necessary for operational, legal, or security purposes.
-
-### Third-party links
-
-Articles may link to external websites. We are not responsible for privacy practices of third-party sites.
-
-### Your choices
-
-You can request updates or deletion of any information you submitted directly by contacting us.
-
-### Policy updates
-
-This policy may be updated over time. Material changes will be reflected by updating the effective date on this page.
-
-### Contact
-
-For privacy questions, use the Contact page on this website.
+For privacy questions, please use [Contact us](/contact).

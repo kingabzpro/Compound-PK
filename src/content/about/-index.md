@@ -1,7 +1,7 @@
 ---
 title: "I’m Abid Ali Awan, Founder of Compound PK"
 meta_title: "About"
-image: "/images/authors/abid-ali-awan.png"
+image: "/images/authors/abid-ali-awan-about.jpg"
 draft: false
 
 what_i_do:
