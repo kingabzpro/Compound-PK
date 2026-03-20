@@ -4,7 +4,7 @@
     "base_url": "https://invest.abid.work",
     "base_path": "/",
     "trailing_slash": false,
-    "favicon": "/images/site-favicon-20260224-v2.svg?v=2",
+    "favicon": "/images/site-favicon-20260320-pk-capsule.svg?v=3",
     "logo": "/images/site-logo-20260224.svg",
     "logo_width": "250",
     "logo_height": "60",
@@ -18,7 +18,7 @@
   "metadata": {
     "meta_author": "Compound PK",
     "meta_image": "/images/site-logo-20260224.svg",
-    "meta_description": "Long-term investing, simplified. Practical investing strategies for Pakistanis pursuing financial independence."
+    "meta_description": "Compound PK explains long-term investing in Pakistan with practical guides on PSX, mutual funds, FIRE planning, and global diversification for Pakistani investors."
   },
 
   "google_tag_manager": {

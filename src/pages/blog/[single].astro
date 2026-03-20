@@ -1,4 +1,5 @@
 ---
+import config from "@/config/config.json";
 import Base from "@/layouts/Base.astro";
 import { getSinglePage } from "@/lib/contentParser.astro";
 import PostSingle from "@/partials/PostSingle.astro";
@@ -17,7 +18,32 @@ export async function getStaticPaths() {
 }
 
 const { post } = Astro.props;
-const { title, meta_title, image, description } = post.data;
+const { title, meta_title, image, description, date, authors, categories, tags } =
+  post.data;
+const articleSchema = {
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  headline: meta_title || title,
+  description,
+  image: image ? [new URL(image, config.site.base_url).toString()] : undefined,
+  datePublished: date?.toISOString(),
+  dateModified: date?.toISOString(),
+  mainEntityOfPage: Astro.url.toString(),
+  author: (authors || []).map((name: string) => ({
+    "@type": "Person",
+    name,
+  })),
+  publisher: {
+    "@type": "Organization",
+    name: config.site.title,
+    logo: {
+      "@type": "ImageObject",
+      url: new URL(config.site.logo, config.site.base_url).toString(),
+    },
+  },
+  articleSection: categories?.[0],
+  keywords: tags?.join(", "),
+};
 ---
 
 <Base
@@ -25,6 +51,8 @@ const { title, meta_title, image, description } = post.data;
   meta_title={meta_title}
   description={description}
   image={image}
+  ogType="article"
+  structuredData={articleSchema}
 >
   <PostSingle post={post} />
 </Base>

@@ -14,7 +14,11 @@ const searchList = posts.map((item) => ({
 }));
 ---
 
-<Base title={`Search`}>
+<Base
+  title="Search"
+  description="Search Compound PK articles by topic, title, or category."
+  noindex={true}
+>
   <section class="section">
     <div class="container">
       <SearchBar client:load searchList={searchList} />

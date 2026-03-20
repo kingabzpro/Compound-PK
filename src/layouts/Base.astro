@@ -28,23 +28,85 @@ export interface Props {
   image?: string;
   noindex?: boolean;
   canonical?: string;
+  ogType?: "website" | "article";
+  structuredData?: Record<string, any> | Array<Record<string, any>>;
 }
 
 // distructure frontmatters
-const { title, meta_title, description, image, noindex, canonical } =
-  Astro.props;
+const {
+  title,
+  meta_title,
+  description,
+  image,
+  noindex,
+  canonical,
+  ogType = "website",
+  structuredData,
+} = Astro.props;
 const siteUrl = new URL(config.site.base_url);
 const pageUrl = canonical
   ? new URL(canonical, siteUrl).toString()
   : new URL(Astro.url.pathname, siteUrl).toString();
+const pageTitle = plainify(
+  meta_title ? meta_title : title ? title : config.site.title,
+);
+const pageDescription = plainify(
+  description ? description : config.metadata.meta_description,
+);
 const metaImageUrl = new URL(
   image ? image : config.metadata.meta_image,
   siteUrl,
 ).toString();
+const isHomePage = Astro.url.pathname === "/";
+const schemaNodes = [
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: config.site.title,
+    url: siteUrl.toString(),
+    logo: new URL(config.site.logo, siteUrl).toString(),
+    description: plainify(config.metadata.meta_description),
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    name: pageTitle,
+    url: pageUrl,
+    description: pageDescription,
+    inLanguage: "en-PK",
+    isPartOf: {
+      "@type": "WebSite",
+      name: config.site.title,
+      url: siteUrl.toString(),
+    },
+  },
+  ...(isHomePage
+    ? [
+        {
+          "@context": "https://schema.org",
+          "@type": "WebSite",
+          name: config.site.title,
+          url: siteUrl.toString(),
+          description: plainify(config.metadata.meta_description),
+          inLanguage: "en-PK",
+          potentialAction: {
+            "@type": "SearchAction",
+            target: `${siteUrl.toString()}search?q={search_term_string}`,
+            "query-input": "required name=search_term_string",
+          },
+        },
+      ]
+    : []),
+  ...(Array.isArray(structuredData)
+    ? structuredData
+    : structuredData
+      ? [structuredData]
+      : []),
+];
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="en-PK">
   <head>
     <!-- google tag manager -->
     {
@@ -64,9 +126,11 @@ const metaImageUrl = new URL(
     }
 
     <!-- favicon -->
+    <link rel="icon" type="image/svg+xml" href={config.site.favicon} />
     <link rel="shortcut icon" href={config.site.favicon} />
     <!-- theme meta -->
     <meta name="theme-name" content="compound-pk" />
+    <meta name="application-name" content={config.site.title} />
     <meta name="msapplication-TileColor" content="#10243F" />
     <meta
       name="theme-color"
@@ -103,9 +167,7 @@ const metaImageUrl = new URL(
     />
 
     <!-- title -->
-    <title>
-      {plainify(meta_title ? meta_title : title ? title : config.site.title)}
-    </title>
+    <title>{pageTitle}</title>
 
     <!-- canonical url -->
     <link rel="canonical" href={pageUrl} item-prop="url" />
@@ -123,49 +185,29 @@ const metaImageUrl = new URL(
     <!-- meta-description -->
     <meta
       name="description"
-      content={plainify(
-        description ? description : config.metadata.meta_description
-      )}
+      content={pageDescription}
     />
 
     <ClientRouter />
 
     <!-- author from config.json -->
     <meta name="author" content={config.metadata.meta_author} />
+    <meta property="og:site_name" content={config.site.title} />
+    <meta property="og:locale" content="en_PK" />
 
     <!-- og-title -->
-    <meta
-      property="og:title"
-      content={plainify(
-        meta_title ? meta_title : title ? title : config.site.title
-      )}
-    />
+    <meta property="og:title" content={pageTitle} />
 
     <!-- og-description -->
-    <meta
-      property="og:description"
-      content={plainify(
-        description ? description : config.metadata.meta_description
-      )}
-    />
-    <meta property="og:type" content="website" />
+    <meta property="og:description" content={pageDescription} />
+    <meta property="og:type" content={ogType} />
     <meta property="og:url" content={pageUrl} />
 
     <!-- twitter-title -->
-    <meta
-      name="twitter:title"
-      content={plainify(
-        meta_title ? meta_title : title ? title : config.site.title
-      )}
-    />
+    <meta name="twitter:title" content={pageTitle} />
 
     <!-- twitter-description -->
-    <meta
-      name="twitter:description"
-      content={plainify(
-        description ? description : config.metadata.meta_description
-      )}
-    />
+    <meta name="twitter:description" content={pageDescription} />
 
     <!-- og-image -->
     <meta property="og:image" content={metaImageUrl} />
@@ -173,6 +215,7 @@ const metaImageUrl = new URL(
     <!-- twitter-image -->
     <meta name="twitter:image" content={metaImageUrl} />
     <meta name="twitter:card" content="summary_large_image" />
+    <script type="application/ld+json" set:html={JSON.stringify(schemaNodes)} />
   </head>
   <body>
     {/* google tag manager noscript */}
