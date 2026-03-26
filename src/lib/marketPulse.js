@@ -28,10 +28,11 @@ const shortTimeFormatter = new Intl.DateTimeFormat("en-PK", {
   timeZone: "Asia/Karachi",
 });
 
-async function fetchText(url) {
+async function fetchText(url, headers = {}) {
   const response = await fetch(url, {
     headers: {
       "user-agent": "Compound PK market pulse",
+      ...headers,
     },
   });
 
@@ -42,10 +43,11 @@ async function fetchText(url) {
   return response.text();
 }
 
-async function fetchJson(url) {
+async function fetchJson(url, headers = {}) {
   const response = await fetch(url, {
     headers: {
       "user-agent": "Compound PK market pulse",
+      ...headers,
     },
   });
 
@@ -70,6 +72,14 @@ function formatUsd(value) {
 
 function formatPercentChange(value) {
   return `${value >= 0 ? "+" : ""}${value.toFixed(2)}%`;
+}
+
+function formatFixedNumber(value, digits = 2) {
+  return Number(value).toFixed(digits);
+}
+
+function formatSignedChange(value, prefix = "") {
+  return `${value >= 0 ? "+" : "-"}${prefix}${formatNumber(Math.abs(value))}`;
 }
 
 function normalizePercentLabel(value) {
@@ -171,8 +181,69 @@ async function getYahooQuote(symbol) {
 
   return {
     regularMarketPrice: meta.regularMarketPrice,
+    previousClose,
     changePercent,
     asOf: marketTime ? formatUpdateStamp(marketTime) : "Live",
+  };
+}
+
+async function getYahooPageQuote(symbol) {
+  const html = await fetchText(`https://finance.yahoo.com/quote/${encodeURIComponent(symbol)}`);
+  const matches = html.matchAll(
+    /<script type="application\/json" data-sveltekit-fetched[^>]*>(.*?)<\/script>/gs,
+  );
+
+  for (const match of matches) {
+    try {
+      const payload = JSON.parse(match[1]);
+      const body = payload?.body ? JSON.parse(payload.body) : undefined;
+      const quote = body?.quoteResponse?.result?.find((entry) => entry.symbol === symbol);
+
+      if (quote?.regularMarketPrice?.raw == null) {
+        continue;
+      }
+
+      return {
+        regularMarketPrice: quote.regularMarketPrice.raw,
+        changePercent:
+          quote.regularMarketChangePercent?.raw ??
+          (quote.regularMarketPreviousClose?.raw
+            ? ((quote.regularMarketPrice.raw - quote.regularMarketPreviousClose.raw) /
+                quote.regularMarketPreviousClose.raw) *
+              100
+            : 0),
+        asOf: quote.regularMarketTime?.raw
+          ? formatUpdateStamp(new Date(quote.regularMarketTime.raw * 1000))
+          : "Live",
+      };
+    } catch {
+      continue;
+    }
+  }
+
+  throw new Error(`${symbol} page quote unavailable`);
+}
+
+async function getGoogleFinanceUsdPkrQuote() {
+  const html = await fetchText("https://www.google.com/finance/quote/USD-PKR");
+  const currentMatch = html.match(/data-last-price="([\d.]+)"/);
+  const previousCloseMatch = html.match(
+    /USD \/ PKR",3,null,\[([\d.]+),([\d.-]+),([\d.-]+),\d+,\d+,\d+\],null,([\d.]+)/,
+  );
+  const timestampMatch = html.match(/data-last-normal-market-timestamp="(\d+)"/);
+
+  if (!currentMatch?.[1] || !previousCloseMatch?.[4]) {
+    throw new Error("Google Finance USD/PKR unavailable");
+  }
+
+  const regularMarketPrice = Number(currentMatch[1]);
+  const previousClose = Number(previousCloseMatch[4]);
+  const quoteTime = timestampMatch?.[1] ? new Date(Number(timestampMatch[1]) * 1000) : undefined;
+
+  return {
+    regularMarketPrice,
+    previousClose,
+    asOf: quoteTime ? formatUpdateStamp(quoteTime) : "Live",
   };
 }
 
@@ -221,9 +292,7 @@ async function getSbpFerSeed() {
       m2mMatch && m2mMatch[1] && m2mMatch[2] && m2mMatch[3] && m2mMatch[4]
         ? {
             value: m2mMatch[2].trim(),
-            change: formatPercentChange(
-              ((Number(m2mMatch[4]) - Number(m2mMatch[3])) / Number(m2mMatch[3])) * 100,
-            ),
+            change: "Official ref",
             asOf: formatUpdateStamp(m2mMatch[1].trim()),
           }
         : undefined,
@@ -232,31 +301,40 @@ async function getSbpFerSeed() {
 
 async function getGoldSeed(symbol) {
   const yahooSymbol = symbol === "XAU" ? "GC=F" : "SI=F";
-  const [fxPayload, payload, yahooQuote] = await Promise.all([
+  const [fxPayload, payload, yahooQuote, fxQuote] = await Promise.all([
     fetchJson("https://open.er-api.com/v6/latest/USD"),
     fetchJson(`https://api.gold-api.com/price/${symbol}`),
     getYahooQuote(yahooSymbol),
+    getYahooQuote("PKR=X"),
   ]);
 
   const date = new Date(payload.updatedAt);
   const pkrRate = fxPayload.rates?.PKR ?? 0;
   const pkrValue = pkrRate > 0 ? payload.price * pkrRate : payload.price;
   const pkrPerTola = pkrValue * TOLA_PER_TROY_OUNCE;
+  const previousPkrPerTola =
+    yahooQuote.previousClose > 0 && fxQuote.previousClose > 0
+      ? yahooQuote.previousClose * fxQuote.previousClose * TOLA_PER_TROY_OUNCE
+      : pkrPerTola;
 
   return {
     value: formatPkr(pkrPerTola),
-    change: formatPercentChange(yahooQuote.changePercent),
+    change: formatSignedChange(pkrPerTola - previousPkrPerTola, "PKR "),
     asOf: Number.isNaN(date.valueOf()) ? yahooQuote.asOf : formatUpdateStamp(date),
   };
 }
 
 async function getCrudeSeed() {
-  const crudeSymbols = ["BZ=F", "CL=F"];
+  const crudeQuotes = [
+    () => getYahooPageQuote("BZ=F"),
+    () => getYahooQuote("BZ=F"),
+    () => getYahooQuote("CL=F"),
+  ];
   let lastError;
 
-  for (const symbol of crudeSymbols) {
+  for (const getQuote of crudeQuotes) {
     try {
-      const quote = await getYahooQuote(symbol);
+      const quote = await getQuote();
 
       return {
         value: formatUsd(quote.regularMarketPrice),
@@ -272,20 +350,30 @@ async function getCrudeSeed() {
 }
 
 async function getUsdPkrSeed() {
-  const [payload, yahooQuote] = await Promise.all([
-    fetchJson("https://open.er-api.com/v6/latest/USD"),
-    getYahooQuote("PKR=X"),
-  ]);
+  try {
+    const googleQuote = await getGoogleFinanceUsdPkrQuote();
 
-  if (!payload.rates?.PKR) {
-    throw new Error("USD/PKR unavailable");
+    return {
+      value: formatNumber(googleQuote.regularMarketPrice),
+      change: formatSignedChange(googleQuote.regularMarketPrice - googleQuote.previousClose),
+      asOf: googleQuote.asOf,
+    };
+  } catch {
+    const [payload, yahooQuote] = await Promise.all([
+      fetchJson("https://open.er-api.com/v6/latest/USD"),
+      getYahooQuote("PKR=X"),
+    ]);
+
+    if (!payload.rates?.PKR) {
+      throw new Error("USD/PKR unavailable");
+    }
+
+    return {
+      value: formatNumber(payload.rates.PKR),
+      change: formatSignedChange(payload.rates.PKR - yahooQuote.previousClose),
+      asOf: payload.time_last_update_utc ? formatUpdateStamp(payload.time_last_update_utc) : "Live",
+    };
   }
-
-  return {
-    value: formatNumber(payload.rates.PKR),
-    change: formatPercentChange(yahooQuote.changePercent),
-    asOf: payload.time_last_update_utc ? formatUpdateStamp(payload.time_last_update_utc) : "Live",
-  };
 }
 
 export async function getSeedMap() {
