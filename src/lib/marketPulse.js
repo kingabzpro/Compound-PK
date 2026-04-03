@@ -145,6 +145,33 @@ function parseLooseDate(value) {
   return Number.isNaN(parsedDate.valueOf()) ? undefined : parsedDate;
 }
 
+function parseDayMonthDate(value) {
+  const match = value.match(/^(\d{1,2})\/(\d{1,2})$/);
+  if (!match) {
+    return undefined;
+  }
+
+  const [, day, month] = match;
+  const now = new Date();
+  const year = now.getUTCFullYear();
+  const parsedDate = new Date(Date.UTC(year, Number(month) - 1, Number(day), 12, 0, 0));
+
+  if (Number.isNaN(parsedDate.valueOf())) {
+    return undefined;
+  }
+
+  const diffMs = parsedDate.valueOf() - now.valueOf();
+  const halfYearMs = 183 * 24 * 60 * 60 * 1000;
+
+  if (diffMs > halfYearMs) {
+    parsedDate.setUTCFullYear(year - 1);
+  } else if (diffMs < -halfYearMs) {
+    parsedDate.setUTCFullYear(year + 1);
+  }
+
+  return parsedDate;
+}
+
 function formatUpdateStamp(input) {
   const parsedDate =
     input instanceof Date
@@ -222,6 +249,50 @@ async function getYahooPageQuote(symbol) {
   }
 
   throw new Error(`${symbol} page quote unavailable`);
+}
+
+async function getOilPriceBrentQuote() {
+  const html = await fetchText("https://oilprice.com/futures/brent/");
+  const currentMatch = html.match(
+    /<div class="current-contract">([^<]+)<\/div>\s*<div class="current-price">([\d.]+)<\/div>\s*<div class="current-change [^"]+">([+-][\d.]+) \(([+-][\d.]+%)\)<\/div>/s,
+  );
+
+  if (!currentMatch) {
+    throw new Error("Oilprice Brent quote unavailable");
+  }
+
+  const [, contract, priceText, absoluteChangeText, changePercentText] = currentMatch;
+  const symbolMatch = html.match(/<div class="price-graph" data-symbol="([^"]+)">/);
+  const currentSymbol = symbolMatch?.[1];
+  const rowPattern = currentSymbol
+    ? new RegExp(
+        `<div class="info_table_row"[^>]*data-symbol="${currentSymbol}"[\\s\\S]*?<div class="info_table_cell date">\\s*([^<]+?)\\s*<\\/div>`,
+      )
+    : /<div class="info_table_row"[^>]*>[\s\S]*?<div class="info_table_cell date">\s*([^<]+?)\s*<\/div>/;
+  const rowMatch = html.match(rowPattern);
+  const parsedDate = rowMatch?.[1] ? parseDayMonthDate(rowMatch[1].trim()) : undefined;
+  const regularMarketPrice = Number(priceText);
+  const absoluteChange = Number(absoluteChangeText);
+  const previousClose =
+    Number.isFinite(regularMarketPrice) && Number.isFinite(absoluteChange)
+      ? regularMarketPrice - absoluteChange
+      : 0;
+  const changePercent = Number(changePercentText.replace("%", ""));
+
+  if (!Number.isFinite(regularMarketPrice)) {
+    throw new Error(`Oilprice Brent price unavailable for ${contract}`);
+  }
+
+  return {
+    regularMarketPrice,
+    previousClose,
+    changePercent: Number.isFinite(changePercent)
+      ? changePercent
+      : previousClose !== 0
+        ? ((regularMarketPrice - previousClose) / previousClose) * 100
+        : 0,
+    asOf: parsedDate ? formatUpdateStamp(parsedDate) : "Live",
+  };
 }
 
 async function getGoogleFinanceUsdPkrQuote() {
@@ -326,6 +397,7 @@ async function getGoldSeed(symbol) {
 
 async function getCrudeSeed() {
   const crudeQuotes = [
+    () => getOilPriceBrentQuote(),
     () => getYahooPageQuote("BZ=F"),
     () => getYahooQuote("BZ=F"),
     () => getYahooQuote("CL=F"),
