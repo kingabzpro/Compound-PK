@@ -32,7 +32,7 @@ The five banks covered in this guide are:
 
 ## 1) Meezan Bank
 
-<img src="https://vectorseek.com/wp-content/uploads/2020/12/Meezan-Bank-Logo-Vector.png" alt="Meezan Bank Pakistan retail Islamic banking" width="420" />
+<img loading="lazy" decoding="async" src="https://vectorseek.com/wp-content/uploads/2020/12/Meezan-Bank-Logo-Vector.png" alt="Meezan Bank Pakistan retail Islamic banking" width="420" />
 
 Meezan Bank is one of the most recognized Islamic banks in Pakistan and is often the first name retail customers consider. Its retail banking setup is built around personal accounts, debit cards, digital banking, and a large branch-backed presence.
 
@@ -50,7 +50,7 @@ Before opening an account, review the latest account terms, fee schedule, and pr
 
 ## 2) BankIslami Pakistan
 
-<img src="https://bankislami.com.pk/wp-content/uploads/2022/01/BIPL-Logo.png" alt="BankIslami Pakistan retail banking" width="420" />
+<img loading="lazy" decoding="async" src="https://bankislami.com.pk/wp-content/uploads/2022/01/BIPL-Logo.png" alt="BankIslami Pakistan retail banking" width="420" />
 
 BankIslami Pakistan is a major Islamic banking player for retail users who want straightforward personal banking services. Its retail offering includes deposit accounts, cards, digital channels, and everyday banking support.
 
@@ -68,7 +68,7 @@ Compare account conditions, digital banking limits, and the latest schedule of c
 
 ## 3) Dubai Islamic Bank Pakistan
 
-<img src="https://www.dibpak.com/wp-content/themes/dib/assets/images/logo2.png" alt="Dubai Islamic Bank Pakistan retail banking" width="350" />
+<img loading="lazy" decoding="async" src="https://www.dibpak.com/wp-content/themes/dib/assets/images/logo2.png" alt="Dubai Islamic Bank Pakistan retail banking" width="350" />
 
 Dubai Islamic Bank Pakistan offers a dedicated Islamic banking brand for retail users who want Shariah-compliant personal banking services. Its public retail positioning centers around core accounts, cards, and digital convenience.
 
@@ -86,7 +86,7 @@ If branch access and service reach matter a lot to you, compare local availabili
 
 ## 4) Askari Bank Islamic
 
-<img src="https://askaribank.com/gallery/islamiclogo.png" alt="Askari Bank Islamic Pakistan retail banking" width="150" />
+<img loading="lazy" decoding="async" src="https://askaribank.com/gallery/islamiclogo.png" alt="Askari Bank Islamic Pakistan retail banking" width="150" />
 
 Askari Bank Islamic is the Islamic banking arm within Askari Bank's wider service ecosystem. It offers Shariah-compliant products for retail customers who prefer banking within a familiar conventional-plus-Islamic structure.
 
@@ -104,7 +104,7 @@ Always confirm whether your preferred branch supports the exact Islamic banking 
 
 ## 5) Al Baraka Bank Pakistan
 
-<img src="https://www.albaraka.com.pk/assets/img/newlogo2.png" alt="Al Baraka Bank Pakistan retail banking" width="250" />
+<img loading="lazy" decoding="async" src="https://www.albaraka.com.pk/assets/img/newlogo2.png" alt="Al Baraka Bank Pakistan retail banking" width="250" />
 
 Al Baraka Bank Pakistan is another established Islamic banking option for retail customers. Its personal banking proposition is built around straightforward Shariah-compliant accounts, deposit products, and everyday banking access.
 

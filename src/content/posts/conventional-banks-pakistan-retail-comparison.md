@@ -32,7 +32,7 @@ The five banks covered in this guide are:
 
 ## 1) Habib Bank Limited (HBL)
 
-<img src="https://www.hbl.com/assets/home-images/HBL-1620X800-2.png" alt="Habib Bank Limited HBL Pakistan retail banking" width="420" />
+<img loading="lazy" decoding="async" src="https://www.hbl.com/assets/home-images/HBL-1620X800-2.png" alt="Habib Bank Limited HBL Pakistan retail banking" width="420" />
 
 HBL is one of the largest and most recognized banks in Pakistan. Its retail banking offering is built around a broad mix of personal accounts, cards, payments, and digital banking tools.
 
@@ -50,7 +50,7 @@ Before opening an account, check the latest schedule of charges, transfer limits
 
 ## 2) United Bank Limited (UBL)
 
-<img src="https://www.ubldigital.com/portals/0/News-Campaigns/Banners/clickokay.jpg" alt="United Bank Limited UBL Pakistan retail banking" width="420" />
+<img loading="lazy" decoding="async" src="https://www.ubldigital.com/portals/0/News-Campaigns/Banners/clickokay.jpg" alt="United Bank Limited UBL Pakistan retail banking" width="420" />
 
 UBL positions itself as a major retail bank with a strong digital banking presence. Its public pages emphasize digital account opening, personal accounts, consumer products, cards, and branch access.
 
@@ -68,7 +68,7 @@ Compare account conditions, digital transaction limits, and service turnaround t
 
 ## 3) Standard Chartered Pakistan
 
-<img src="https://www.sc.com/en/uploads/sites/66/content/images/Standard-chartered-office-1754989684-856x488.png" alt="Standard Chartered Pakistan retail banking" width="420" />
+<img loading="lazy" decoding="async" src="https://www.sc.com/en/uploads/sites/66/content/images/Standard-chartered-office-1754989684-856x488.png" alt="Standard Chartered Pakistan retail banking" width="420" />
 
 Standard Chartered Pakistan is more digitally oriented and often appeals to customers who prefer remote banking, card-led banking, and a more premium retail experience.
 
@@ -86,7 +86,7 @@ If you depend heavily on frequent branch visits or cash-intensive banking, compa
 
 ## 4) Allied Bank Limited
 
-<img src="https://www.abl.com/wp-content/uploads/2025/12/Simply-use-myABL-and-enjoy-the-numerous-benefits-of-online-banking.png" alt="Allied Bank Limited" width="420" />
+<img loading="lazy" decoding="async" src="https://www.abl.com/wp-content/uploads/2025/12/Simply-use-myABL-and-enjoy-the-numerous-benefits-of-online-banking.png" alt="Allied Bank Limited" width="420" />
 
 Allied Bank remains a major local retail bank in Pakistan, combining traditional banking access with an increasingly active digital banking layer through myABL.
 
@@ -104,7 +104,7 @@ Always review product-level charges, eligibility requirements, and specific acco
 
 ## 5) Bank Alfalah Limited
 
-<img src="https://prodbaf.blob.core.windows.net/media/hero-slider-images/Rapid.webp" alt="Bank Alfalah Limited" width="420" />
+<img loading="lazy" decoding="async" src="https://prodbaf.blob.core.windows.net/media/hero-slider-images/Rapid.webp" alt="Bank Alfalah Limited" width="420" />
 
 Bank Alfalah has built a strong retail proposition around convenience, digital access, cards, accounts, and the Alfa app ecosystem. Its public retail pages put major emphasis on digital banking and consumer usability.
 

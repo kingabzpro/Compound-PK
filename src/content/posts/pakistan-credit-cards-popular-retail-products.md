@@ -41,7 +41,7 @@ Credit cards can support a FIRE plan only when they reduce net cost and improve 
 
 ## 1) HBL Platinum
 
-<img src="https://www.hbl.com/assets/images/Hbl-Visa-Platinum-Day-600X500.png" alt="HBL Platinum Credit Card" width="420" />
+<img loading="lazy" decoding="async" src="https://www.hbl.com/assets/images/Hbl-Visa-Platinum-Day-600X500.png" alt="HBL Platinum Credit Card" width="420" />
 
 Based on HBL public details, Platinum is positioned as a premium everyday travel-lifestyle card with lounge support through Visa Airport Companion.
 
@@ -51,7 +51,7 @@ Always confirm visit caps, guest rules, and annual fee waiver criteria from HBL'
 
 ## 2) Bank Alfalah Ultra Cashback
 
-<img src="https://prodbaf.blob.core.windows.net/media/hero-images/Cards-08_trXnkcz.jpg" alt="Bank Alfalah Ultra Cashback" width="420" />
+<img loading="lazy" decoding="async" src="https://prodbaf.blob.core.windows.net/media/hero-images/Cards-08_trXnkcz.jpg" alt="Bank Alfalah Ultra Cashback" width="420" />
 
 Bank Alfalah markets this card around category-based cashback flexibility (including rotating categories) and everyday spend optimization.
 
@@ -61,7 +61,7 @@ Cashback cards work best only when category caps, exclusions, and annual ceiling
 
 ## 3) Standard Chartered World
 
-<img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fav.sc.com%2Fpk%2Fcontent%2Fimages%2Fpk-mastercard-world-mobile.jpg&f=1&nofb=1&ipt=3a7013b1d3cca766d01871b9257fd4eb51c9c299c7b69b9cb5c6b6ec9a03e7a2" alt="Standard Chartered World" width="420" />
+<img loading="lazy" decoding="async" src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fav.sc.com%2Fpk%2Fcontent%2Fimages%2Fpk-mastercard-world-mobile.jpg&f=1&nofb=1&ipt=3a7013b1d3cca766d01871b9257fd4eb51c9c299c7b69b9cb5c6b6ec9a03e7a2" alt="Standard Chartered World" width="420" />
 
 Standard Chartered World is positioned as a travel-first product with miles earning, lounge ecosystem access, and concierge-style support.
 
@@ -71,7 +71,7 @@ If you mostly spend locally and rarely travel, you may pay for premium benefits 
 
 ## 4) Askari World
 
-<img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse3.mm.bing.net%2Fth%2Fid%2FOIP.EOxh2qlZU_BUykuaaFfoowAAAA%3Fpid%3DApi&f=1&ipt=b78484a737d0ebb472c6ba6c8737c4009ecf2e3be93b866c1f5952ef92d67aff" alt="Askari World Mastercard" width="420" />
+<img loading="lazy" decoding="async" src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse3.mm.bing.net%2Fth%2Fid%2FOIP.EOxh2qlZU_BUykuaaFfoowAAAA%3Fpid%3DApi&f=1&ipt=b78484a737d0ebb472c6ba6c8737c4009ecf2e3be93b866c1f5952ef92d67aff" alt="Askari World Mastercard" width="420" />
 
 Askari's World variant sits in the bank's higher Mastercard lineup and is generally marketed for premium lifestyle and travel usage.
 
@@ -81,7 +81,7 @@ Askari pages are sometimes difficult to access from automated crawlers, so verif
 
 ## 5) UBL Visa Platinum
 
-<img src="https://ubldigital.com/portals/0/pdf/Platinum-Credit-Card.png" alt="UBL Visa Platinum" width="420" />
+<img loading="lazy" decoding="async" src="https://ubldigital.com/portals/0/pdf/Platinum-Credit-Card.png" alt="UBL Visa Platinum" width="420" />
 
 UBL highlights reward points acceleration on international spending and airport lounge-oriented positioning for Platinum users.
 

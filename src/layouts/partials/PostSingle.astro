@@ -2,6 +2,7 @@
 import Share from "@/components/Share.astro";
 import SimilarPosts from "@/components/SimilarPosts.astro";
 import { getSinglePage } from "@/lib/contentParser.astro";
+import { getOptimizedImageProps, resolveContentImageUrl } from "@/lib/images";
 import dateFormat from "@/lib/utils/dateFormat";
 import similerItems from "@/lib/utils/similarItems";
 import { humanize, markdownify, slugify } from "@/lib/utils/textConverter";
@@ -16,6 +17,7 @@ const similarPosts = similerItems(post, posts, post.slug);
 const { Content } = await render(post);
 const { title, description, authors, categories, image, date, tags } =
   post.data;
+const heroImageUrl = resolveContentImageUrl(image);
 ---
 
 <section class="section">
@@ -33,21 +35,29 @@ const { title, description, authors, categories, image, date, tags } =
                     .includes(slugify(author.data.title))
                 )
                 .map((author) => (
-                  <a
-                    href={`/authors/${slugify(author.id)}`}
-                    class="flex items-center hover:text-primary font-medium"
-                  >
-                    {author.data.image && (
-                      <Image
-                        src={author.data.image}
-                        alt={author.data.title}
-                        height={50}
-                        width={50}
-                        class="mr-2 h-6 w-6 rounded-full"
-                      />
-                    )}
-                    <span>{author.data.title}</span>
-                  </a>
+                  (() => {
+                    const authorImageProps = getOptimizedImageProps(author.data.image);
+
+                    return (
+                      <a
+                        href={`/authors/${slugify(author.id)}`}
+                        class="flex items-center hover:text-primary font-medium"
+                      >
+                        {authorImageProps && (
+                          <Image
+                            {...authorImageProps}
+                            alt={author.data.title}
+                            height={50}
+                            width={50}
+                            class="mr-2 h-6 w-6 rounded-full"
+                            loading="lazy"
+                            decoding="async"
+                          />
+                        )}
+                        <span>{author.data.title}</span>
+                      </a>
+                    );
+                  })()
                 ))
             }
           </li>
@@ -78,17 +88,18 @@ const { title, description, authors, categories, image, date, tags } =
       </div>
 
       <div class="col-12 mt-8 mb-2">
-        {
-          image && (
-            <Image
-              src={image}
-              height={500}
-              width={1000}
-              alt={title}
-              class="rounded-lg"
-            />
-          )
-        }
+        {heroImageUrl && (
+          <img
+            src={heroImageUrl}
+            height={500}
+            width={1000}
+            alt={title}
+            class="rounded-lg"
+            loading="eager"
+            decoding="async"
+            fetchpriority="high"
+          />
+        )}
       </div>
 
       <div class="md:col-10">

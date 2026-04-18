@@ -101,6 +101,9 @@ export default function SearchBar({ searchList }: Props) {
                   alt={item.data.title}
                   width={445}
                   height={230}
+                  loading="lazy"
+                  decoding="async"
+                  fetchPriority="low"
                 />
               </a>
             )}

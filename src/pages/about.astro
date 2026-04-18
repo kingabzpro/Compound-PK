@@ -1,13 +1,14 @@
 ---
 import Base from "@/layouts/Base.astro";
+import { resolveContentImageUrl } from "@/lib/images";
 import { markdownify } from "@/lib/utils/textConverter";
-import { Image } from "astro:assets";
 import type { CollectionEntry } from "astro:content";
 import { getEntry, render } from "astro:content";
 
 const entry = (await getEntry("about", "-index")) as CollectionEntry<"about">;
 const { Content } = await render(entry);
 const { title, meta_title, image, what_i_do } = entry.data;
+const aboutImageUrl = resolveContentImageUrl(image);
 ---
 
 <Base title={title} meta_title={meta_title} image={image}>
@@ -16,14 +17,16 @@ const { title, meta_title, image, what_i_do } = entry.data;
       <div class="row md:gx-4">
         <div class="sm:col-5 md:col-4">
           {
-            image && (
+            aboutImageUrl && (
               <div class="img-cover mb-8 md:mb-0 md:mx-auto md:max-w-[19rem]">
-                <Image
-                  src={image}
+                <img
+                  src={aboutImageUrl}
                   width={720}
                   height={900}
                   alt={title}
                   class="aspect-[4/5] w-full rounded-2xl object-cover object-top"
+                  loading="eager"
+                  decoding="async"
                 />
               </div>
             )

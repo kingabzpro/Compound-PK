@@ -1,5 +1,6 @@
 ---
 import Social from "@/components/Social.astro";
+import { getOptimizedImageProps } from "@/lib/images";
 import { markdownify } from "@/lib/utils/textConverter";
 import { Image } from "astro:assets";
 import { render } from "astro:content";
@@ -7,20 +8,23 @@ import { render } from "astro:content";
 const { author } = Astro.props;
 const { title, image, social } = author.data;
 const { Content } = await render(author);
+const authorImageProps = getOptimizedImageProps(image);
 ---
 
 <section class="section">
   <div class="container">
     <div class="mb-4 text-center md:px-24">
       {
-        image && (
+        authorImageProps && (
           <div class="mb-8">
             <Image
-              src={image}
+              {...authorImageProps}
               class="mx-auto rounded-lg"
               height={150}
               width={150}
               alt={title}
+              loading="eager"
+              decoding="async"
             />
           </div>
         )

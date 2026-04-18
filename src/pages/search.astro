@@ -2,16 +2,37 @@
 import SearchBar from "@/helpers/SearchBar";
 import Base from "@/layouts/Base.astro";
 import { getSinglePage } from "@/lib/contentParser.astro";
+import { resolveContentImage } from "@/lib/images";
+import { getImage } from "astro:assets";
 
 // Retrieve all articles
 const posts = await getSinglePage("posts");
 
 // List of items to search in
-const searchList = posts.map((item) => ({
-  slug: item.id,
-  data: item.data,
-  content: item.body,
-}));
+const searchList = await Promise.all(
+  posts.map(async (item) => {
+    const resolvedImage = resolveContentImage(item.data.image);
+    const optimizedImage =
+      resolvedImage && typeof resolvedImage !== "string"
+        ? await getImage({
+            src: resolvedImage,
+            width: 445,
+            height: 230,
+            format: resolvedImage.format,
+            quality: 100,
+          })
+        : undefined;
+
+    return {
+      slug: item.id,
+      data: {
+        ...item.data,
+        image: optimizedImage?.src ?? item.data.image,
+      },
+      content: item.body,
+    };
+  }),
+);
 ---
 
 <Base
