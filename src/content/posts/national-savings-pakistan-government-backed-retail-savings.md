@@ -43,71 +43,41 @@ If you qualify and want monthly cash flow, **Behbood Saving Certificates** are u
 
 ## 1) Defence Saving Certificates
 
-### What stands out
-
 Defence Saving Certificates are a long-tenure certificate product with a **10-year** maturity, low starting denomination, and no maximum investment limit. Their practical appeal is simplicity: they are built for savers who want a government-backed certificate route rather than a draw-based instrument or a monthly-income product.
 
-### Best for
-
 Defence Saving Certificates are best for savers who want a long-horizon fixed-income certificate and do not need monthly payouts from the investment.
-
-### Watch-outs
 
 National Savings states that no profit is payable if encashment is made before completion of one full year. You should also verify the latest rate, tax, and zakat treatment before investing because these details materially affect real return.
 
 ## 2) Behbood Saving Certificates
 
-### What stands out
-
 Behbood Saving Certificates were introduced for eligible beneficiaries including senior citizens, widows, and certain disabled investors and special minors through guardians. Their main attraction is **monthly profit payments** and a **10-year** tenure, which makes them one of the most obvious retirement-income style options in the National Savings menu.
 
-### Best for
-
 Behbood is best for eligible households that want government-backed monthly income and place more value on cash flow than on product flexibility.
-
-### Watch-outs
 
 This is not open to everyone. Eligibility documents matter, purchase is more restrictive, and you should verify the latest tax and zakat treatment directly from National Savings before acting.
 
 ## 3) Regular Income Certificates
 
-### What stands out
-
 Regular Income Certificates are built around **monthly profit payments** with a **5-year** maturity and broad eligibility for the general public. For savers who want a simpler mainstream monthly-income product without special beneficiary rules, this is the most straightforward choice in the list.
 
-### Best for
-
 Regular Income Certificates are best for savers who want predictable monthly income from a government-backed certificate and do not qualify for Behbood.
-
-### Watch-outs
 
 Early encashment can trigger service charges before completion of four years, and the latest official rate is lower than Behbood’s current listed rate. Verify current profit, tax, and encashment rules before locking funds in.
 
 ## 4) Prize Bonds
 
-### What stands out
-
 Prize Bonds are very different from the certificate products. National Savings treats them as draw-based instruments with multiple denominations, no purchase limit, and face-value encashment, but they do **not** provide regular profit income. Their appeal is liquidity plus a chance to win prize money.
 
-### Best for
-
 Prize Bonds are best for savers who want a simple government-backed parking instrument with draw participation and are comfortable with irregular, luck-based upside instead of predictable yield.
-
-### Watch-outs
 
 Do not treat Prize Bonds like an income product. Returns are uncertain, tax applies to winnings, and only bonds issued at least 60 days before the draw qualify for prize eligibility.
 
 ## 5) Premium Prize Bonds
 
-### What stands out
-
 Premium Prize Bonds combine **quarterly prize draws** with **bi-annual profit payments** and are registered in the investor’s name. National Savings also highlights direct credit of prize money and profit to the investor’s bank account, which makes them more operationally structured than ordinary prize bonds.
 
-### Best for
-
 Premium Prize Bonds are best for savers with larger ticket sizes who want a registered draw-based instrument plus some profit payments, rather than relying only on draw luck.
-
-### Watch-outs
 
 The denominations are much higher than ordinary prize bonds, bank-account documentation is required, and this is still not the same as a high-cash-flow certificate. Verify the latest profit rate, tax treatment, and operational rules before buying.
 

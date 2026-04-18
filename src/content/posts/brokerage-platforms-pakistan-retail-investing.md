@@ -45,71 +45,41 @@ If you want an established full-service brokerage with broader market reputation
 
 ## 1) JS Global
 
-### What stands out
-
 JS Global positions itself as a broad brokerage and wealth platform with digital account-opening options, multiple account types, and access to market participation through its online systems. For a retail investor, the practical attraction is that it combines an established broker identity with a more accessible online front end.
 
-### Best for
-
 JS Global is a strong fit for investors who want a traditional broker brand but still want online access and a clearer retail path than an old-school branch-only process.
-
-### Watch-outs
 
 Feature breadth is helpful only if the platform remains easy to use. Compare the exact trading charges, app experience, and support response before assuming the bigger platform is automatically the better one.
 
 ## 2) AKD Securities
 
-### What stands out
-
 AKD Securities presents itself as one of Pakistan’s largest brokerage houses and emphasizes both market share and online trading capabilities. That makes it more of a classic established broker choice for investors who want institutional heft rather than a minimalist app-led experience.
 
-### Best for
-
 AKD is a sensible option for investors who value a large brokerage name, stronger market presence, and a more traditional research-and-execution environment.
-
-### Watch-outs
 
 Large brokerage branding does not guarantee the best retail onboarding experience. Verify how easy the current account-opening, trading, and support process feels for a normal retail user.
 
 ## 3) KTrade
 
-### What stands out
-
 KTrade is positioned as a retail-friendly digital investing platform built around app and online trading access. Compared with traditional brokerage houses, the appeal is simplicity: it is easier to understand as a consumer investing product than as a relationship-driven brokerage setup.
 
-### Best for
-
 KTrade is best for self-directed retail investors who want a simpler digital path into market access and do not need heavy broker-assisted hand-holding.
-
-### Watch-outs
 
 Because the platform story is more app-led, you should verify the underlying broker entity, exact fee schedule, complaint channel, and current product scope before you fund the account.
 
 ## 4) Arif Habib Limited
 
-### What stands out
-
 Arif Habib Limited combines brokerage, research, and broader capital-market credibility under one established local name. For retail investors, the main value is that it can feel like a deeper traditional broker setup rather than a single-purpose mobile investing app.
 
-### Best for
-
 Arif Habib Limited is a good fit for investors who value research-backed decision support, stronger market reputation, and a more institutional brokerage environment.
-
-### Watch-outs
 
 Traditional broker depth can also mean more complexity. If your actual need is simple long-term investing, compare whether you really need the extra structure or would be better served by a lighter platform.
 
 ## 5) Finqalab
 
-### What stands out
-
 Finqalab is positioned as a mobile-first investing experience with a simpler consumer interface than a classic broker dashboard. Its public messaging leans into ease of use, portfolio visibility, and a smoother retail journey, which makes it stand out for new investors who might be intimidated by legacy broker workflows.
 
-### Best for
-
 Finqalab is best for beginners and casual retail investors who want a cleaner, app-first investing experience and value simplicity over brokerage tradition.
-
-### Watch-outs
 
 Simple UX does not reduce market risk or platform due diligence. You still need to confirm the underlying broker structure, charges, withdrawal flow, and how the app handles support and operational issues.
 

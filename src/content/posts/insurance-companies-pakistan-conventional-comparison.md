@@ -44,71 +44,41 @@ If you need long-term life or health protection, **State Life**, **EFU Life**, a
 
 ## 1) State Life Insurance Corporation
 
-### What stands out
-
 State Life positions itself as Pakistan’s largest life and health insurer. Its practical advantage for retail buyers is scale: it combines long operating history, nationwide familiarity, and a public-sector identity that many families still treat as a trust signal when buying long-term protection or savings-linked plans.
 
-### Best for
-
 State Life is best for buyers who want a large, established life insurer with broad physical reach and a more traditional insurance relationship.
-
-### Watch-outs
 
 State Life is a better fit for life and health protection than for day-to-day retail general insurance shopping. Before choosing it, verify the exact policy structure, bonus assumptions, exclusions, and servicing flow for the plan you actually want.
 
 ## 2) EFU Life Assurance
 
-### What stands out
-
 EFU Life presents itself as a leading private-sector life and health insurer with a strong digital ecosystem. Its public material emphasizes private-sector scale, technology-led distribution, and partnerships that make insurance more accessible through digital channels.
 
-### Best for
-
 EFU Life is a strong fit for retail users who want private-sector life insurance depth with a more modern servicing and distribution approach.
-
-### Watch-outs
 
 A wide product menu can look attractive, but policy details still vary sharply by plan. Check the exact premium commitment, surrender rules, health network terms, and exclusions before deciding.
 
 ## 3) Jubilee Life Insurance
 
-### What stands out
-
 Jubilee Life positions itself as the largest private-sector life insurance company in Pakistan, with meaningful scale in individual life, health, and corporate business. For a retail buyer, the practical appeal is breadth: it has a large private-sector footprint and a strong bancassurance presence.
 
-### Best for
-
 Jubilee Life is a good fit for buyers who want a large private-sector life insurer and prefer choosing through mainstream bank and partner channels.
-
-### Watch-outs
 
 Do not choose Jubilee only because of market presence. Compare the exact policy wording, network access, waiting periods, and benefit conditions for the plan you are considering.
 
 ## 4) Adamjee Insurance
 
-### What stands out
-
 Adamjee Insurance is positioned as one of Pakistan’s largest general insurers, with products spanning travel, car, health, personal accident, and home insurance. The key distinction is that Adamjee is more relevant when your need is general insurance rather than life insurance or long-term family protection.
 
-### Best for
-
 Adamjee is best for users shopping for mainstream general insurance through a large, established non-life insurer.
-
-### Watch-outs
 
 Adamjee is not a direct substitute for a life insurer. Decide the insurance class first, because comparing Adamjee against life-focused names only at brand level can lead to the wrong shortlist.
 
 ## 5) TPL Insurance
 
-### What stands out
-
 TPL Insurance presents itself as Pakistan’s leading insurtech and highlights direct-to-consumer general insurance, app-led servicing, and 24x7 customer support. For retail users, that makes it one of the more obvious choices when convenience and online policy handling matter.
 
-### Best for
-
 TPL Insurance is best for users who want app-led or digital-first general insurance, especially around categories like motor, travel, home, and other retail policies.
-
-### Watch-outs
 
 TPL’s digital convenience does not make it the right answer for life insurance needs. It also still requires the usual discipline around reading exclusions, claims conditions, and policy-specific limits before buying.
 

@@ -45,71 +45,41 @@ If you want the most important domestic retail rail today, start with **Raast** 
 
 ## 1) Raast
 
-### What stands out
-
 SBP positions Raast as Pakistan’s first instant payment system, designed to enable end-to-end digital payments among individuals, businesses, and government entities. Its biggest retail advantage is instant account-to-account transfer capability using IBAN or a Raast ID, instead of depending on older batch-style banking processes.
 
-### Best for
-
 Raast is the best fit for users who want fast domestic bank transfers and for banks or wallets building around real-time account-based payments rather than card rails.
-
-### Watch-outs
 
 Raast is only as useful as the app or bank layer sitting on top of it. Some institutions support more features than others, so verify whether your provider supports the exact transfer, alias, or merchant flow you want.
 
 ## 2) 1LINK
 
-### What stands out
-
 1LINK describes itself as Pakistan’s first fully licensed PSO/PSP and the country’s largest payment and switch system. Its role is broader than a consumer app: it sits underneath shared ATM access, interbank funds transfer, bill payments, and several other payment services used by banks and institutions.
 
-### Best for
-
 1LINK matters most for consumers who rely on ATM interoperability, bank-to-bank routing, and bill-payment infrastructure working across multiple financial institutions.
-
-### Watch-outs
 
 Retail users do not usually choose 1LINK directly. They experience it through their bank or wallet, so service quality, downtime handling, and user interface still depend heavily on the front-end provider.
 
 ## 3) PayPak
 
-### What stands out
-
 PayPak is Pakistan’s domestic payment scheme and is owned and operated by 1LINK under the aegis of SBP. The practical appeal is local card-scheme economics and domestic control, which matters for financial inclusion, local card issuance, and reducing dependence on international-only schemes for some retail use cases.
 
-### Best for
-
 PayPak is a sensible fit for local debit-card usage where domestic acceptance matters more than international travel or global online checkout compatibility.
-
-### Watch-outs
 
 Domestic card schemes do not automatically offer the same international acceptance as Visa or Mastercard. If you shop cross-border, travel frequently, or rely on international websites, verify whether your card is domestic-only or co-badged.
 
 ## 4) MNET Switch
 
-### What stands out
-
 MNET was an important early switch in Pakistan’s ATM and card-interoperability history. SBP’s payment-system history notes that MNET was established by MCB in 2001, and MCB’s later annual-report disclosures reflect that MNET Services was merged into MCB in 2019. That means MNET matters more as a legacy milestone than as the central retail rail story today.
 
-### Best for
-
 MNET is mainly relevant for readers trying to understand how Pakistan’s retail payments evolved before today’s stronger focus on Raast, 1LINK, and broader digital-payment partnerships.
-
-### Watch-outs
 
 Do not treat MNET like a current standalone consumer decision in the same way as Raast or PayPak. For present-day retail use, it is more historical context than a direct selection point.
 
 ## 5) Visa / Mastercard
 
-### What stands out
-
 Visa and Mastercard are global card networks rather than domestic instant-payment rails. In Pakistan, they still matter because they expand international acceptance, card standards, online checkout reach, and issuer partnerships. Mastercard’s Pakistan-facing material emphasizes acceptance and digital ecosystem growth, while Visa’s payments-ecosystem work highlights broader resilience and inclusion.
 
-### Best for
-
 Visa / Mastercard are the right fit for users who care about international card acceptance, travel, online payments, or banks issuing globally recognized credentials.
-
-### Watch-outs
 
 These schemes solve a different problem than Raast. They are not substitutes for instant bank-to-bank transfers, and their retail economics depend on the issuing bank’s charges, FX pricing, card type, and merchant acceptance.
 
