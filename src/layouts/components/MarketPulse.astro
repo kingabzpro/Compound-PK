@@ -95,7 +95,7 @@ const marketTiles: MarketTile[] = defaultTiles.map((tile) => ({
     </div>
   </div>
 
-  <div class="relative grid grid-cols-2 gap-1">
+  <div class="relative grid grid-cols-2 gap-1 market-pulse-tiles" data-market-tiles>
     {
       marketTiles.map((tile) => {
         const Icon = tile.icon;
@@ -158,6 +158,8 @@ const marketTiles: MarketTile[] = defaultTiles.map((tile) => ({
   const pulsePanel = document.querySelector("[data-market-pulse]");
 
   if (pulsePanel) {
+    const tilesGrid = pulsePanel.querySelector("[data-market-tiles]");
+    tilesGrid?.classList.add("market-pulse-stale");
     type TileUpdate = {
       value?: string;
       change?: string;
@@ -229,8 +231,11 @@ const marketTiles: MarketTile[] = defaultTiles.map((tile) => ({
         Object.entries(payload as Record<string, TileUpdate>).forEach(([key, update]) => {
           setTile(key, update);
         });
+
+        tilesGrid?.classList.remove("market-pulse-stale");
       } catch (error) {
         console.error("Market pulse refresh failed", error);
+        tilesGrid?.classList.remove("market-pulse-stale");
       } finally {
         refreshInFlight = false;
       }
@@ -249,3 +254,12 @@ const marketTiles: MarketTile[] = defaultTiles.map((tile) => ({
     });
   }
 </script>
+
+<style>
+  .market-pulse-stale {
+    opacity: 0.35;
+    filter: blur(3px);
+    pointer-events: none;
+    transition: opacity 0.3s ease, filter 0.3s ease;
+  }
+</style>
