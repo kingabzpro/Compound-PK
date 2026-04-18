@@ -12,26 +12,6 @@ draft: false
 
 Most investing mistakes in Pakistan happen before the first good investment decision ever has a chance to matter. People open the wrong account, trust the wrong person, skip the paperwork, or chase promises that were unrealistic from day one.
 
-## Why this checklist matters
-
-The biggest early risk is usually not valuation. It is process failure. If your account structure, record-keeping, broker verification, or risk expectations are weak, even a decent investment idea can turn into an avoidable loss.
-
-### Use this checklist before you think about returns
-
-- Verify who you are dealing with.
-- Keep control of your own account and records.
-- Slow down whenever someone adds pressure or promises certainty.
-
-### The 4 things to check first
-
-1. Whether the entity or person you are dealing with is actually regulated or verifiable.
-2. Whether the account is in your own name and under your own control.
-3. Whether you understand the product, the fees, and the core risks.
-4. Whether the investing plan fits your time horizon and cash-flow reality.
-
-## Quick answer
-
-Before investing in Pakistan, your first goal is not picking a winning asset. It is building a clean operating system. Verify the broker or intermediary, open and control your own account, document everything, and treat guaranteed-return language as a warning sign. The long-term investor who moves carefully at the start usually avoids the most expensive mistakes later.
 
 ## 1. Verify the channel before the opportunity
 
